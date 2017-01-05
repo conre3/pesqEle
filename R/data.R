@@ -42,3 +42,19 @@
 #' }
 #' @source \url{http://inter01.tse.jus.br/pesqele-publico/app/pesquisa/listarEstatisticos.xhtml}
 "pesq_details"
+
+#' CONRE-3 registered companies
+#'
+#' A raw dataset containing registered companies scraped from CONRE-3 site.
+#'
+#' @format A data frame with 133 rows and 5 variables:
+#' \describe{
+#'    \item{razao_social}{Name of the company.}
+#'    \item{uf}{State initials.}
+#'    \item{cnpj}{Company national id.}
+#'    \item{no_registro_conre_3}{CONRE3 id.}
+#'    \item{estatistico_responsavel}{Name of the statistitian.}
+#' }
+#' @source \url{http://www.conre3.org.br/portal/profissionais-e-empresas-do-conre-3-2/}
+"conre3_companies"
+
