@@ -1,0 +1,195 @@
+---
+title: "pesqEle"
+author: "Julio Trecenti"
+date: "`r Sys.Date()`"
+output: bookdown::html_document2
+vignette: >
+  %\VignetteIndexEntry{pesqEle}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+[![Travis-CI Build Status](https://travis-ci.org/conre3/pesqEle.svg?branch=master)](https://travis-ci.org/conre3/pesqEle)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/conre3/pesqEle?branch=master&svg=true)](https://ci.appveyor.com/project/conre3/pesqEle)
+
+```{r load, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(stringr)
+library(abjutils)
+library(leaflet)
+devtools::load_all('.')
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# pesqEle
+
+Scraper de estatísticos registrados nas pesquisas do TSE.
+
+## Instalação
+
+Este pacote não está disponível no CRAN. Para instalar, rode
+
+```{r echo=TRUE, eval=FALSE}
+if (!require(devtools)) install.packages('devtools')
+devtools::install_github('conre3/pesqEle')
+```
+
+## Utilização
+
+Esse pacote contém funções úteis para baixar informações do serviço [pesqEle](http://inter01.tse.jus.br/pesqele-publico/app/pesquisa/listarEstatisticos.xhtml) do TSE. Exemplo de utilização:
+
+```{r echo=TRUE, eval=FALSE}
+library(pesqEle)
+data(cities)
+d_log <- pesq_download_cities(head(cities))
+arqs_main <- dir('data-raw/html', 
+                 pattern = '[A-Z]{2}_[0-9]+\\.html',
+                 full.names = TRUE)
+arqs_details <- dir('data-raw/html', 
+                    pattern = '[A-Z]{2}_[0-9]+_[0-9]+\\.html',
+                    full.names = TRUE)
+d_main <- pesq_parse_main(arqs_main)
+d_details <- pesq_parse_main(arqs_details)
+```
+
+As bases completas já foram baixadas e carregadas no pacote:
+
+- `cities` contém a relação de cidades.
+- `pesq_main` contém informações básicas de cada pesquisa eleitoral.
+- `pesq_detalhes` contém detalhes de cada pesquisa eleitoral.
+
+Veja `help(<bd>)` para mais detalhes.
+
+# Histórico
+
+A [Consulta às Pesquisas Eleitorais por Estatístico](http://inter01.tse.jus.br/pesqele-publico/app/pesquisa/listarEstatisticos.xhtml) é uma ferramenta do TSE que permite consultar todas as pesquisas eleitorais realizadas no Brasil. A possibilidade de pesquisar pesquisas por nome do estatístico revelou uma série de fraudes, como a [inclusão indevida da presidente do CONRE-3 em mais de 20 pesquisas eleitorais](http://www.conre3.org.br/portal/3113-2/).
+
+# Análise da base de dados
+
+Foram baixadas duas bases principais. A primeira, aqui chamada `pesq_main` mostra informações básicas de cada pesquisa, especificamente: código identificador, nome fantasia da empresa contratada, nome e número de registro do estatístico, data de registro, município e UF. A segunda, chamada `pesq_details` está estruturada na forma 'key-value' e contém informações do plano amostral, custo e CNPJ da empresa responsável.
+
+```{r tidy-main}
+pesq_main_tidy <- pesq_main %>% 
+  filter(numero_de_identificacao != 'Nenhum registro encontrado!') %>% 
+  set_names(c('arq', 'id', 'empresa', 'id_stat', 'nm_stat', 
+              'dt_reg', 'abrangencia', 'acoes')) %>% 
+  select(arq:abrangencia) %>% 
+  separate(abrangencia, c('uf', 'muni'), sep = ' / ') %>% 
+  mutate(nm_stat = rm_accent(toupper(nm_stat))) %>% 
+  mutate(arq_id = str_extract(arq, '[A-Z]{2}_[0-9]+')) %>% 
+  distinct(arq_id, id, .keep_all = TRUE)
+```
+
+## Base principal
+
+Temos no total `r nrow(pesq_main_tidy)` pesquisas registradas, envolvendo `r n_distinct(pesq_main_tidy$nm_stat)` nomes distintos de estatísticos responsáveis e `r n_distinct(pesq_main_tidy$empresa)` nomes distintos de empresas.
+
+As Tabelas \@ref(fig:stat20) e \@ref(fig:emp20) mostram o volume de pesquisas registradas por nome do estatístico responsável e nome fantasia da empresa, respectivamente.
+
+```{r stat20, fig.cap='<br/>'}
+pesq_main_tidy %>%
+  count(nm_stat, sort = TRUE) %>%
+  DT::datatable(caption = 'Volume de pesquisas por estatístico responsável')
+```
+
+```{r emp20, fig.cap='<br/>'}
+pesq_main_tidy %>%
+  count(empresa, sort = TRUE) %>%
+  DT::datatable(caption = 'Volume de pesquisas por empresa.')
+```
+
+A Figura \@ref(fig:tempo) mostra o volume de pesquisas registradas diariamente.
+
+```{r tempo, fig.cap='Volume diário de pesquisas registradas.'}
+p <- pesq_main_tidy %>% 
+  mutate(dt_reg = lubridate::dmy(dt_reg)) %>% 
+  mutate(mes = lubridate::floor_date(dt_reg, '1 day')) %>% 
+  count(mes) %>% 
+  ggplot(aes(x = as.Date(mes), y = n)) +
+  geom_line() +
+  scale_x_date(breaks = scales::date_breaks('1 month'),
+               labels = scales::date_format(format = '%Y-%b')) +
+  theme_bw(16) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  xlab('dia') +
+  ylab('Volume de pesquisas')
+plotly::ggplotly(p)
+```
+
+A Figura \@ref(fig:map) mostra a distribuição geográfica das pesquisas. Ainda falta arrumar 19 nomes que não bateram.
+
+```{r map, fig.cap='Distribuição geográfica das pesquisas registradas.'}
+data(br_uf_map, package = 'abjData')
+data(cadmun, package = 'abjData')
+munis <- cadmun %>%
+  select(uf, muni = MUNNOMEX, lat, lon)
+map_tidy <- pesq_main_tidy %>% 
+  mutate(muni = abjutils::rm_accent(muni)) %>% 
+  count(uf, muni) %>% 
+  ungroup() %>% 
+  arrange(desc(n)) %>% 
+  # precisa arrumar os nomes que nao batem
+  inner_join(munis, c('uf', 'muni')) 
+map_tidy %>%
+  mutate(lab = paste(uf, muni, n, sep = '<br/>')) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = ~lon, lat = ~lat,
+             clusterOptions = markerClusterOptions(),
+             popup = ~lab) %>%
+  setView(-55, -15, 4)
+```
+
+## Base detalhada
+
+A Tabela \@ref(fig:cnpj) mostra todas as 537 empresas que registraram pesquisas, ordenadas por volume de pesquisas. As 10 empresas com maior volume de pesquisas concentram 20% das pesquisas.
+
+```{r cnpj, fig.cap='<br/>'}
+pesq_details %>%
+  filter(key == 'Empresa contratada/ Nome Fantasia') %>%
+  mutate(cnpj = str_match(val, '([0-9]{14})')[, 2]) %>%
+  count(val, cnpj, sort = TRUE) %>%
+  ungroup() %>%
+  arrange(desc(n)) %>%
+  mutate(`%` = scales::percent(cumsum(n / sum(n)))) %>%
+  DT::datatable(caption = 'Empresas que registraram pesquisas ordenadas por volume de pesquisas.')
+```
+
+A Tabela \@ref(tab:conre) confronta os CNPJs das empresas que realizaram pesquisas (somente em SP, PR, MT e MS) com a relação de empresas que estão registradas e em dia com o CONRE-3. A Tabela \@ref(fig:conre2) mostra a relação das empresas que não estão registradas ou estão registradas e não estão em dia com o CONRE-3. É importante mencionar que as empresas dessa relação podem ser registradas em conselhos de outras regiões.
+
+```{r conre}
+pesq_conre3 <- pesq_details %>% 
+  filter(key %in% c('Empresa contratada/ Nome Fantasia',
+                    'Número de identificação')) %>% 
+  spread(key, val) %>% 
+  janitor::clean_names() %>% 
+  set_names(rm_accent(names(.))) %>% 
+  mutate(cnpj = str_match(empresa_contratada_nome_fantasia, 
+                          '([0-9]{14})')[, 2],
+         nm = empresa_contratada_nome_fantasia) %>% 
+  mutate(id = numero_de_identificacao) %>% 
+  select(-numero_de_identificacao, 
+         -empresa_contratada_nome_fantasia) %>% 
+  mutate(arq_id = str_extract(arq, '[A-Z]{2}_[0-9]+')) %>% 
+  inner_join(pesq_main_tidy, c('arq_id', 'id')) %>% 
+  filter(uf %in% c('SP', 'MT', 'MS', 'PR')) %>% 
+  left_join(select(conre3_companies, cnpj, razao_social), 'cnpj') 
+
+pesq_conre3 %>%
+  distinct(cnpj, .keep_all = TRUE) %>%
+  count(Registrado = if_else(!is.na(razao_social), 'Sim', 'Não')) %>%
+  knitr::kable(caption = 'Contagem de empresas registradas no CONRE-3 que registraram pesquisas no TSE.')
+```
+
+```{r conre2, fig.cap='<br/>'}
+pesq_conre3 %>% 
+  filter(is.na(razao_social)) %>% 
+  count(cnpj, nm) %>% 
+  ungroup() %>% 
+  arrange(desc(n)) %>% 
+  DT::datatable(caption = 'Relação de empresas que registraram pesquisas em SP, MT, MS ou PR e não estão registradas ou não estão em dia com o CONRE-3.')
+```
+
+# License
+
+MIT
