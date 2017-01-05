@@ -1,6 +1,6 @@
 Package: pesqEle
 Title: Scrape Elections Survey metadata from TSE platform
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Authors@R: person("Julio", "Trecenti", email = "jtrecenti@jtrecenti.com", role = c("aut", "cre"))
 Description: Scrape Elections Survey metadata from TSE platform.
 Depends:
@@ -21,6 +21,17 @@ Imports: plyr,
     abjutils,
     magrittr,
     purrr,
-    tibble
+    tibble,
+    tidyverse,
+    bookdown,
+    leaflet,
+    plotly,
+    abjData,
+    DT,
+    devtools,
+    scales
 Remotes:
-    abjur/abjutils
+    abjur/abjData
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
