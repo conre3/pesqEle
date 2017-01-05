@@ -84,13 +84,13 @@ A Figura @ref(fig:tempo) mostra o volume de pesquisas registradas
 diariamente.
 
 ![Volume diário de pesquisas
-registradas.](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/tempo-1.png)
+registradas.](README_files/figure-markdown_strict/tempo-1.png)
 
 A Figura @ref(fig:map) mostra a distribuição geográfica das pesquisas.
 Ainda falta arrumar 19 nomes que não bateram.
 
 ![Distribuição geográfica das pesquisas
-registradas.](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/map-1.png)
+registradas.](README_files/figure-markdown_strict/map-1.png)
 
 Base detalhada
 --------------
