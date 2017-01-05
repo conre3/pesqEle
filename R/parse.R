@@ -29,21 +29,6 @@ parse_arq <- function(arq) {
   tib
 }
 
-limpar_kv_spr <- function(d) {
-  d %>%
-    dplyr::filter(!is.na(key)) %>%
-    tidyr::spread(key, val) %>%
-    janitor::clean_names() %>%
-    purrr::set_names(abjutils::rm_accent(names(.)))
-}
-
-limpar_kv <- function(d) {
-  d %>%
-    tibble::as_tibble() %>%
-    setNames(c('key', 'val')) %>%
-    dplyr::mutate(key = stringr::str_replace_all(key, ':$', ''))
-}
-
 parse_detalhes_arq <- function(arq, rds = FALSE) {
   arq_rds <- paste0(tools::file_path_sans_ext(arq), '.rds')
   if (!file.exists(arq_rds)) {
@@ -70,7 +55,7 @@ parse_detalhes_arq <- function(arq, rds = FALSE) {
     d <- dplyr::bind_rows(infos_basicas, contrat, outras_infos) %>%
       dplyr::filter(!is.na(key)) %>%
       dplyr::mutate(result = 'OK')
-      if (rds) saveRDS(d, arq_rds)
+    if (rds) saveRDS(d, arq_rds)
     d
   } else {
     readRDS(arq_rds) %>%
@@ -95,3 +80,4 @@ pesq_parse_details <- function(arqs) {
     dplyr::do(f(.$arq)) %>%
     dplyr::ungroup()
 }
+
