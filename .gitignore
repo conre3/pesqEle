@@ -4,3 +4,4 @@
 data-raw/html
 inst/doc
 data-raw/cnpj.xlsx
+vignettes/rsconnect
