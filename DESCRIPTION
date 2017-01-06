@@ -29,7 +29,8 @@ Imports: plyr,
     abjData,
     DT,
     devtools,
-    scales
+    scales,
+    roxygen2(>= 5.0.1)
 Remotes:
     abjur/abjData
 Suggests: knitr,
