@@ -30,9 +30,11 @@ Imports: plyr,
     DT,
     devtools,
     scales,
+    conreCNPJ,
     roxygen2(>= 5.0.1)
 Remotes:
-    abjur/abjData
+    abjur/abjData,
+    conre3/conreCNPJ
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
