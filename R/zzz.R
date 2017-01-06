@@ -16,7 +16,6 @@ limpar_kv <- function(d) {
     dplyr::mutate(key = stringr::str_replace_all(key, ':$', ''))
 }
 
-
 #' Pipe operator
 #'
 #' See \code{\link[magrittr]{\%>\%}} for more details.
