@@ -76,21 +76,21 @@ As Tabelas @ref(fig:stat20) e @ref(fig:emp20) mostram o volume de
 pesquisas registradas por nome do estatístico responsável e nome
 fantasia da empresa, respectivamente.
 
-![<br/>](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/stat20-1.png)
+![<br/>](README_files/figure-markdown_strict/stat20-1.png)
 
-![<br/>](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/emp20-1.png)
+![<br/>](README_files/figure-markdown_strict/emp20-1.png)
 
 A Figura @ref(fig:tempo) mostra o volume de pesquisas registradas
 diariamente.
 
 ![Volume diário de pesquisas
-registradas.](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/tempo-1.png)
+registradas.](README_files/figure-markdown_strict/tempo-1.png)
 
 A Figura @ref(fig:map) mostra a distribuição geográfica das pesquisas.
 Ainda falta arrumar 19 nomes que não bateram.
 
 ![Distribuição geográfica das pesquisas
-registradas.](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/map-1.png)
+registradas.](README_files/figure-markdown_strict/map-1.png)
 
 Base detalhada
 --------------
@@ -99,7 +99,7 @@ A Tabela @ref(fig:cnpj) mostra todas as 537 empresas que registraram
 pesquisas, ordenadas por volume de pesquisas. As 10 empresas com maior
 volume de pesquisas concentram 20% das pesquisas.
 
-![<br/>](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/cnpj-1.png)
+![<br/>](README_files/figure-markdown_strict/cnpj-1.png)
 
 A Tabela @ref(tab:conre) confronta os CNPJs das empresas que realizaram
 pesquisas (somente em SP, PR, MT e MS) com a relação de empresas que
@@ -129,7 +129,7 @@ regiões.
 </tbody>
 </table>
 
-![<br/>](/home/jtrecenti/conre3/pesqEle/README_files/figure-markdown_strict/conre2-1.png)
+![<br/>](README_files/figure-markdown_strict/conre2-1.png)
 
 License
 =======
