@@ -4,3 +4,4 @@
 ^appveyor\.yml$
 ^data-raw$
 ^README_files$
+^vignettes/rsconnect$
