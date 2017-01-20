@@ -83,14 +83,12 @@ fantasia da empresa, respectivamente.
 A Figura @ref(fig:tempo) mostra o volume de pesquisas registradas
 diariamente.
 
-![Volume diário de pesquisas
-registradas.](README_files/figure-markdown_strict/tempo-1.png)
+![Volume diário de pesquisas registradas.](README_files/figure-markdown_strict/tempo-1.png)
 
 A Figura @ref(fig:map) mostra a distribuição geográfica das pesquisas.
 Ainda falta arrumar 19 nomes que não bateram.
 
-![Distribuição geográfica das pesquisas
-registradas.](README_files/figure-markdown_strict/map-1.png)
+![Distribuição geográfica das pesquisas registradas.](README_files/figure-markdown_strict/map-1.png)
 
 Base detalhada
 --------------
@@ -103,14 +101,14 @@ volume de pesquisas concentram 20% das pesquisas.
 
 A Tabela @ref(tab:conre) confronta os CNPJs das empresas que realizaram
 pesquisas (somente em SP, PR, MT e MS) com a relação de empresas que
-estão registradas e em dia com o CONRE-3 ou o CONRE-6. A Tabela
-@ref(fig:conre2) mostra a relação das empresas que não estão registradas
-ou estão registradas e não estão em dia com o CONRE-3 ou CONRE-6. É
-importante mencionar que as empresas dessa relação podem ser registradas
-em conselhos de outras regiões.
+estão registradas e em dia com o CONRE-3, o CONRE-4 ou o CONRE-6. A
+Tabela @ref(fig:conre2) mostra a relação das empresas que não estão
+registradas ou estão registradas e não estão em dia com o CONRE-3 ou
+CONRE-6. É importante mencionar que as empresas dessa relação podem ser
+registradas em conselhos de outras regiões.
 
 <table>
-<caption>Contagem de empresas registradas no CONRE-3 ou CONRE-6 que registraram pesquisas no TSE (somente em SP, PR, MT e MS).</caption>
+<caption>Contagem de empresas registradas no CONRE-3, CONRE-4 ou CONRE-6 que registraram pesquisas no TSE (somente em SP, PR, MT e MS).</caption>
 <thead>
 <tr class="header">
 <th align="left">Registrado</th>
@@ -120,11 +118,11 @@ em conselhos de outras regiões.
 <tbody>
 <tr class="odd">
 <td align="left">Não</td>
-<td align="right">108</td>
+<td align="right">104</td>
 </tr>
 <tr class="even">
 <td align="left">Sim</td>
-<td align="right">62</td>
+<td align="right">66</td>
 </tr>
 </tbody>
 </table>
