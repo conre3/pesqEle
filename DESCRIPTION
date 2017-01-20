@@ -35,6 +35,7 @@ Imports: plyr,
 Remotes:
     abjur/abjData,
     conre3/conreCNPJ
+    
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
