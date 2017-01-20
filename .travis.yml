@@ -7,7 +7,7 @@ cache: packages
 addons:
   apt:
     packages:
-      - gcc-4.6
+      - gcc-4.9
       - libwebp-dev
       - libpoppler-cpp-dev
       - valgrind
