@@ -1,7 +1,7 @@
 pesq_download_city <- function(uf, muni, path) {
   u <- u_tse()
   arq <- sprintf('%s/%s_%s.html', path, uf, muni)
-  f <- dplyr::failwith('erro', function(item) {
+  f <- purrr::possibly(function(item) {
     arq_detalhe <- sprintf('%s/%s_%s_%03d.html', path, uf, muni, item + 1)
     if (!file.exists(arq_detalhe)) {
       wd <- httr::write_disk(arq_detalhe, overwrite = TRUE)
@@ -12,8 +12,9 @@ pesq_download_city <- function(uf, muni, path) {
     } else {
       'ja foi'
     }
-  })
+  }, 'erro')
   res <- 'ja foi'
+  r_pags <- ""
   if (!file.exists(arq)) {
     r0 <- httr::GET(u)
     r_muni <- httr::POST(u, body = form_tse_estado(uf, vs(r0)), encode = 'form')
@@ -25,6 +26,58 @@ pesq_download_city <- function(uf, muni, path) {
     res <- 'OK'
   }
   tibble::tibble(result = res, pags = list(r_pags))
+}
+
+pesq_download_details <- function(item, path, date, uf, r0) {
+  u <- u_tse()
+  fmt <- format(as.Date(date), "%Y%m%d")
+  .file_detail <- sprintf('%s/details%s_%s_%03d.html', path, uf, fmt, item + 1)
+  result <- 'already exists'
+  if (!file.exists(.file_detail)) {
+    wd <- httr::write_disk(.file_detail, overwrite = TRUE)
+    body <- form_detalhar_date(item, as.Date(date), vs(r0))
+    r_details <- httr::POST(u, body = body, encode = 'form')
+    httr::GET(u_detalhar(), wd)
+    result <- 'OK'
+  }
+  result
+}
+
+pesq_download_day <- function(date, path, uf = "") {
+  fmt <- format(as.Date(date), "%Y%m%d")
+  .file <- sprintf("%s/pesqEle%s_%s.html", path, uf, fmt)
+  .f <- purrr::possibly(pesq_download_details, 'error')
+  res <- "existe"
+  r_pags <- ""
+  if (!file.exists(.file)) {
+    u <- u_tse()
+    r0 <- httr::GET(u)
+    wd <- httr::write_disk(.file, overwrite = TRUE)
+    body <- form_tse_date(date, vs(r0), uf)
+    r <- httr::POST(u, body = body, encode = "form", wd)
+    d_results <- parse_arq(.file)
+    # if more than 100 results, breaks download in UFs
+    if (nrow(d_results) == 100L) {
+      file.remove(.file)
+      results <- purrr::map_dfr(ufs(), ~pesq_download_day(date, path, .x))
+      return(results)
+    } else {
+      r_pags <- purrr::map_chr(seq_len(nrow(d_results)) - 1,
+                               .f, path = path, date = date,
+                               uf = uf, r0 = r0)
+    }
+    res <- "OK"
+  }
+  tibble::tibble(result = res, pags = list(r_pags))
+}
+
+pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
+  dir.create(path, FALSE, TRUE)
+  pb <- progress::progress_bar$new(total = length(date))
+  purrr::map_dfr(date, ~{
+    pb$tick()
+    pesq_download_day(.x, path)
+  }, .id = "date")
 }
 
 #' Downloads pesqEle files
@@ -58,11 +111,18 @@ pesq_download_city <- function(uf, muni, path) {
 #'
 #' @export
 pesq_download_cities <- function(cities, path = 'data-raw/html') {
-  f <- dplyr::failwith(tibble::tibble(result = 'erro'), pesq_download_city)
-  cities %>%
-    dplyr::group_by(uf, muni) %>%
-    dplyr::do(f(uf = .$uf, muni = .$muni, path = path)) %>%
-    dplyr::ungroup()
+  dir.create(path, FALSE, TRUE)
+  .f <- purrr::possibly(pesq_download_city, tibble::tibble(result = 'error'))
+  ..f <- function(...) {
+    pb$tick()
+    .f(...)
+  }
+  fmt <- "downloading [:bar] :percent eta: :eta"
+  nm <- paste(cities[["uf"]], cities[["muni"]], sep = "_")
+  pb <- progress::progress_bar$new(total = nrow(cities), format = fmt)
+  purrr::map2_dfr(purrr::set_names(cities[["uf"]], nm),
+                  cities[["muni"]], ..f,
+                  path = path, .id = ".id")
 }
 
 #' Viewstate

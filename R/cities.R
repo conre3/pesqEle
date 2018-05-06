@@ -18,10 +18,12 @@ pesq_city_codes <- function() {
   d_munis <- plyr::ldply(ufs, function(uf) {
     r0 <- httr::GET(u)
     r <- httr::POST(u, body = form_tse_estado(uf, vs(r0)), encode = 'form')
+    httr::content(r, "text")
     munis <- r %>%
       httr::content('text') %>%
       xml2::read_html() %>%
-      rvest::html_nodes(xpath = '//select[@id="formPesquisa:selectCidades_input"]//option') %>%
+      xml2::xml_find_first("//update[@id='formPesquisa:selectCidades']/div[2]") %>%
+      rvest::html_nodes(xpath = './select[@id="formPesquisa:selectCidades_input"]//option') %>%
       rvest::html_attr('value')
     tibble::tibble(uf = uf, muni = munis)
   }, .progress = 'text')

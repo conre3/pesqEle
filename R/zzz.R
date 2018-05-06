@@ -16,6 +16,12 @@ limpar_kv <- function(d) {
     dplyr::mutate(key = stringr::str_replace_all(key, ':$', ''))
 }
 
+ufs <- function() {
+  c("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA",
+    "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN",
+    "RO", "RR", "RS", "SC", "SE", "SP", "TO")
+}
+
 #' Pipe operator
 #'
 #' See \code{\link[magrittr]{\%>\%}} for more details.

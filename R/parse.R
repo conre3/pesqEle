@@ -9,7 +9,7 @@
 #'
 #' @export
 pesq_parse_main <- function(arqs) {
-  f <- dplyr::failwith(tibble::tibble(result = 'erro'), parse_arq)
+  f <- purrr::possibly(parse_arq, tibble::tibble(result = 'erro'))
   tibble::tibble(arq = arqs) %>%
     dplyr::group_by(arq) %>%
     dplyr::do(f(.$arq)) %>%
@@ -74,7 +74,7 @@ parse_detalhes_arq <- function(arq, rds = FALSE) {
 #'
 #' @export
 pesq_parse_details <- function(arqs) {
-  f <- dplyr::failwith(tibble::tibble(result = 'erro'), parse_detalhes_arq)
+  f <- purrr::possibly(parse_detalhes_arq, tibble::tibble(result = 'erro'))
   tibble::tibble(arq = arqs) %>%
     dplyr::group_by(arq) %>%
     dplyr::do(f(.$arq)) %>%
