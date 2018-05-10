@@ -38,4 +38,3 @@ d_results <- pesq_download_cities(head(cities))
 }
 
 }
-

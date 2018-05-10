@@ -16,4 +16,3 @@ pesq_parse_main(arqs)
 Parse main HTML files returned by \code{\link{pesq_download_cities}}
 into \code{tibbles}.
 }
-

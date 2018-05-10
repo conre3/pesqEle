@@ -19,4 +19,3 @@ cities
 A dataset containing a list of states and city codes from TSE pesqEle platform.
 }
 \keyword{datasets}
-

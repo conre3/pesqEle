@@ -18,4 +18,3 @@ Needs stable internet connection.
 \seealso{
 \code{\link{cities}}.
 }
-

@@ -9,4 +9,3 @@ u_detalhar()
 \description{
 Details URL from pesqEle for each individual result.
 }
-

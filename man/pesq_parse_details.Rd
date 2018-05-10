@@ -16,4 +16,3 @@ pesq_parse_details(arqs)
 Parse details HTML files returned by \code{\link{pesq_download_cities}}
 into \code{tibbles}.
 }
-

@@ -27,4 +27,3 @@ Cities with zero results are informed but have the column
 \code{numero_de_identificacao} equal 'Nenhum registro encontrado!'.
 }
 \keyword{datasets}
-

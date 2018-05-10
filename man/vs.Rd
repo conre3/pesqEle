@@ -12,4 +12,3 @@ vs(r)
 \description{
 Capture viewstate from response object.
 }
-
