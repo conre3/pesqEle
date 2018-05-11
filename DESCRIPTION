@@ -32,7 +32,12 @@ Imports: plyr,
     devtools,
     scales,
     conreCNPJ,
-    roxygen2(>= 5.0.1)
+    roxygen2(>= 5.0.1),
+    SoundexBR,
+    fs,
+    glue,
+    progress,
+    readr
 Remotes:
     abjur/abjData,
     conre3/conreCNPJ

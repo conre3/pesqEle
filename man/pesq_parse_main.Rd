@@ -10,7 +10,7 @@ pesq_parse_main(arqs)
 \item{arqs}{character vector containing file paths. Valid files have \code{<UF>_<code>.html} format.}
 }
 \value{
-\code{tibble} containing 8 columns, specified in \code{\link{pesq_main}}.
+\code{tibble} containing 8 columns.
 }
 \description{
 Parse main HTML files returned by \code{\link{pesq_download_cities}}

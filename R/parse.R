@@ -5,7 +5,7 @@
 #'
 #' @param arqs character vector containing file paths. Valid files have \code{<UF>_<code>.html} format.
 #'
-#' @return \code{tibble} containing 8 columns, specified in \code{\link{pesq_main}}.
+#' @return \code{tibble} containing 8 columns.
 #'
 #' @export
 pesq_parse_main <- function(arqs) {
@@ -70,7 +70,7 @@ parse_detalhes_arq <- function(arq, rds = FALSE) {
 #'
 #' @param arqs character vector containing file paths. Valid files have \code{<UF>_<code>_<result_id>.html} format.
 #'
-#' @return \code{tibble} containing 3 columns, specified in \code{\link{pesq_details}}.
+#' @return \code{tibble} containing 3 columns.
 #'
 #' @export
 pesq_parse_details <- function(arqs) {
