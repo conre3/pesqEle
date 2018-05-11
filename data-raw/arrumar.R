@@ -57,7 +57,7 @@ pesq_details_tidy <- pesq_details %>%
                 origem = stringr::str_remove_all(origem, "[^a-zA-Z ]"),
                 origem = stringr::str_squish(origem)) %>%
   replace_na(list(origem = "Vazio")) %>%
-  mutate(contratante_propria_empresa = if_else(contratante_propria_empresa == "Não", "Não", "Sim")) %>%
+  mutate(contratante_propria_empresa = if_else(contratante_propria_empresa == "N\u00e3o", "N\u00e3o", "Sim")) %>%
   mutate(estatistico_registro = str_extract(estatistico_registro, "[0-9]+")) %>%
   mutate(arq_id = str_extract(arq, "([0-9A-Z_)]+)(?=_)")) %>%
   mutate(criterio_origem = origem == "Recursos proprios" &
@@ -93,7 +93,7 @@ pesq_main_tidy <- pesq_main %>%
   mutate(arq_id = str_extract(arq, "([0-9A-Z_)]+)(?=\\.)")) %>%
   distinct(arq_id, id, .keep_all = TRUE)
 
-# expressões regulares ---------------------------------------------------------
+# express\u00f5es regulares ---------------------------------------------------------
 re_origem <- "(?<=Origem do Recurso: )([a-zA-Z()\\s]+)"
 re_cnpj <- "(?<=CNPJ:\\s{1,5})([0-9]+)"
 
@@ -143,12 +143,12 @@ pesq_details_tidy <- pesq_details %>%
          origem = str_squish(origem)) %>%
   replace_na(list(origem = "Vazio")) %>%
   mutate(contratante_propria_empresa = if_else(
-    contratante_propria_empresa == "Não", "Não", "Sim")) %>%
+    contratante_propria_empresa == "N\u00e3o", "N\u00e3o", "Sim")) %>%
   mutate(estatistico_registro = str_extract(estatistico_registro, "[0-9]+")) %>%
   mutate(arq_id = str_extract(arq, "([0-9A-Z_)]+)(?=_)")) %>%
   mutate(criterio_origem = origem == "Recursos proprios" &
            contratante_propria_empresa == "Sim") %>%
-  # tudo o que nao bateu é lixo - dado duplicado
+  # tudo o que nao bateu \u00e9 lixo - dado duplicado
   inner_join(select(pesq_main_tidy, -arq), c("id", "arq_id")) %>%
   group_by(estatistico_registro) %>%
   mutate(empresas_por_estatistico = n_distinct(empresa), n = n()) %>%
@@ -181,23 +181,23 @@ id_fonema <- function(stat_id, stat_nm) {
 pesqEle2018 <- pesq_details_tidy %>%
   rowid_to_column("id_seq") %>%
   select(
-    # informações de identificação
+    # informa\u00e7\u00f5es de identifica\u00e7\u00e3o
     id_seq,
     id_pesq = id,
     id_muni = arq_id,
-    # informações básicas
+    # informa\u00e7\u00f5es b\u00e1sicas
     info_uf = uf,
     info_muni = muni,
     info_election = eleicao,
     info_position = cargo,
-    # informações da empresa
+    # informa\u00e7\u00f5es da empresa
     comp_nm = emp_nm,
     comp_cnpj = cnpj,
     comp_contract_same = contratante_propria_empresa,
-    # informações do estatístico responsável
+    # informa\u00e7\u00f5es do estat\u00edstico respons\u00e1vel
     stat_id = id_stat,
     stat_nm = nm_stat,
-    # informações da pesquisa
+    # informa\u00e7\u00f5es da pesquisa
     pesq_n = n_entrevistados,
     pesq_val = valor,
     pesq_contractors = contratantes,
@@ -214,7 +214,7 @@ pesqEle2018 <- pesq_details_tidy %>%
     txt_about = sobre_municipio,
     txt_plan = plano_amostral
   ) %>%
-  filter(info_election == "Eleições Gerais 2018") %>%
+  filter(info_election == "Elei\u00e7\u00f5es Gerais 2018") %>%
   separate(id_pesq, c("info_uf", "temp"), "-", remove = FALSE) %>%
   select(-temp, -info_muni) %>%
   mutate(id_unico = id_fonema(stat_id, stat_nm))
