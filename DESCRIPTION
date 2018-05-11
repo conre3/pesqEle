@@ -4,7 +4,7 @@ Version: 0.0.1.0
 Authors@R: person("Julio", "Trecenti", email = "jtrecenti@jtrecenti.com", role = c("aut", "cre"))
 Description: Scrape Elections Survey metadata from TSE platform.
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
