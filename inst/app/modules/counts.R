@@ -22,8 +22,8 @@ counts <- function(input, output, session, df_pesq) {
   output$num_pesquisas <- shinydashboard::renderInfoBox({
     shinydashboard::infoBox(
       title = "Pesquisas",
-      value = nrow(df_pesq), 
-      icon = icon("users", lib = "font-awesome"),
+      value = nrow(df_pesq()), 
+      icon = icon("search", lib = "font-awesome"),
       color = "blue", 
       fill = TRUE
     )
@@ -31,10 +31,10 @@ counts <- function(input, output, session, df_pesq) {
   
   output$num_estatisticos <- shinydashboard::renderInfoBox({
     shinydashboard::infoBox(
-      title = "Estatísticos responsáveis",
-      value = nrow(dplyr::distinct(df_pesq, stat_nm)), 
+      title = "Estatísticos",
+      value = nrow(dplyr::distinct(df_pesq(), stat_nm)), 
       icon = icon("users", lib = "font-awesome"),
-      color = "blue", 
+      color = "yellow", 
       fill = TRUE
     )
   })
@@ -42,24 +42,31 @@ counts <- function(input, output, session, df_pesq) {
   output$num_empresas <- shinydashboard::renderInfoBox({
     shinydashboard::infoBox(
       title = "Empresas",
-      value = nrow(dplyr::distinct(df_pesq, comp_nm)), 
-      icon = icon("users", lib = "font-awesome"),
-      color = "blue", 
+      value = nrow(dplyr::distinct(df_pesq(), comp_nm)), 
+      icon = icon("building", lib = "font-awesome"),
+      color = "red", 
       fill = TRUE
     )
   })
   
   output$valor_mediano <- shinydashboard::renderInfoBox({
     
-    valor <- (df_pesq$pesq_val/df_pesq$pesq_n) %>% 
-      median(rm.na = TRUE) %>% 
-      round(2)
+    real <- function(x) {
+      
+      stringr::str_c(
+        "R$", 
+        format(x, big.mark = ".", nsmall = 2, digits = 2, decimal.mark = ",")
+      )
+      
+    }
+    
+    valor <- median(df_pesq()$pesq_val, rm.na = TRUE) %>% real()
     
     shinydashboard::infoBox(
       title = "Valor mediano",
       value = valor, 
-      icon = icon("users", lib = "font-awesome"),
-      color = "blue", 
+      icon = icon("money-bill-alt", lib = "font-awesome"),
+      color = "green", 
       fill = TRUE
     )
   })
