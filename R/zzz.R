@@ -1,5 +1,14 @@
 globalVariables(c('.', 'X1', 'X2', 'X3', 'X4', 'arq', 'cnpj',
-                  'key', 'muni', 'n', 'setNames', 'uf', 'val'))
+                  'key', 'muni', 'n', 'setNames', 'uf', 'val',
+                  'acoes', 'arq_id', 'cargo', 'contratante_propria_empresa',
+                  'contratantes', 'criterio_origem', 'dt_divulgacao',
+                  'dt_inicio', 'dt_registro', 'dt_termino', 'eleicao',
+                  'emp_nm', 'empresa', 'empresa_contratada',
+                  'estatistico_registro', 'id', 'id_pesq', 'id_seq',
+                  'info_election', 'metodologia_pesquisa', 'municipio',
+                  'n_entrevistados', 'numero_de_identificacao', 'origem',
+                  'plano_amostral', 'result', 'sobre_municipio',
+                  'stat_id', 'stat_nm', 'temp', 'valor', 'verificacao'))
 
 limpar_kv_spr <- function(d) {
   d %>%

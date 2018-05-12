@@ -4,13 +4,12 @@ Version: 0.0.1.0
 Authors@R: person("Julio", "Trecenti", email = "jtrecenti@jtrecenti.com", role = c("aut", "cre"))
 Description: Scrape Elections Survey metadata from TSE platform.
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Imports: plyr,
-    feather,
     dplyr,
     tidyr,
     httr,
@@ -23,16 +22,14 @@ Imports: plyr,
     magrittr,
     purrr,
     tibble,
-    tidyverse,
-    bookdown,
-    leaflet,
-    plotly,
     abjData,
-    DT,
-    devtools,
-    scales,
     conreCNPJ,
-    roxygen2(>= 5.0.1)
+    roxygen2(>= 5.0.1),
+    SoundexBR,
+    fs,
+    glue,
+    progress,
+    readr
 Remotes:
     abjur/abjData,
     conre3/conreCNPJ

@@ -129,6 +129,13 @@ registradas em conselhos de outras regiões.
 
 ![<br/>](README_files/figure-markdown_strict/conre2-1.png)
 
+TODO
+
+- [ ] deploy do shiny
+- [ ] mandar para o CRAN
+- [ ] cron job pra baixar os dados automaticamente
+- [ ] fazer o pacote buildar e passar nos CI da vida
+
 License
 =======
 

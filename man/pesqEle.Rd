@@ -20,10 +20,8 @@
    \item{stat_nm}{.}
    \item{pesq_n}{.}
    \item{pesq_val}{.}
-   \item{pesq_contractors}{.}
    \item{pesq_origin}{.}
    \item{pesq_contractors}{.}
-   \item{pesq_origin}{.}
    \item{dt_reg}{.}
    \item{dt_pub}{.}
    \item{dt_start}{.}
