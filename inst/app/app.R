@@ -26,7 +26,7 @@ ui <- dashboardPage(
       menuItem(
         text = "Visão geral", 
         tabName = "visao_geral", 
-        icon = shiny::icon("info")
+        icon = shiny::icon("globe")
       ),
       menuItem(
         text = "Estatísticos responsáveis",
@@ -37,13 +37,31 @@ ui <- dashboardPage(
         text = "Valor das pesquisas",
         tabName = "valor",
         icon = shiny::icon("info")
+      ),
+      tags$hr(),
+      radioButtons(
+        inputId = "abrangencia",
+        label = "Incluir",
+        choiceNames = c(
+          "Todas as pesquisas",
+          "Apenas pesquisas estaduais",
+          "Apenas pesquisas estaduais"
+          ),
+        choiceValues = c("todas", "estaduais", "nacionais")
       )
     )
   ),
   dashboardBody(
+    tags$head(
+      tags$link(
+        rel = "stylesheet", 
+        type = "text/css",  
+        href="https://use.fontawesome.com/releases/v5.0.9/css/all.css")
+    ),
     countsOutput(id = "contagens"),
     tabItems(
-      visaogeralOutput(id = "visao_geral")
+      visaogeralOutput(id = "visao_geral"),
+      estatisticosOutput(id = "estatisticos")
     )
   )
 )
@@ -52,10 +70,22 @@ ui <- dashboardPage(
 
 server <- function(input, output, session) {
   
+  df_pesq_filtrado <- reactive({
+    
+    if(input$abrangencia == "todas") {
+      df_pesq
+    } else if(input$abrangencia == "estaduais") {
+      dplyr::filter(df_pesq, info_uf != "BRASIL")
+    } else {
+      dplyr::filter(df_pesq, info_uf == "BRASIL")
+    }
+    
+  })
+  
   callModule(
     module = counts,
     id = "contagens",
-    df_pesq = df_pesq
+    df_pesq = df_pesq_filtrado
   )
   
   callModule(
@@ -63,8 +93,12 @@ server <- function(input, output, session) {
     id = "visao_geral",
     df_pesq = df_pesq
   )
-
   
+  callModule(
+    module = estatisticos,
+    id = "estatisticos",
+    df_pesq = df_pesq_filtrado
+  )
   
 }
 
