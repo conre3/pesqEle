@@ -1,7 +1,10 @@
 Package: pesqEle
 Title: Scrape Elections Survey metadata from TSE platform
 Version: 0.0.1.0
-Authors@R: person("Julio", "Trecenti", email = "jtrecenti@jtrecenti.com", role = c("aut", "cre"))
+Authors@R: as.person(c(
+    "Julio Trecenti <jtrecenti@jtrecenti.com> [aut, cre]", 
+    "William Amorim <thewilliam89@gmail.com> [aut]"
+  ))
 Description: Scrape Elections Survey metadata from TSE platform.
 Depends:
     R (>= 3.3)
