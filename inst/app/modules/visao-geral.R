@@ -6,7 +6,7 @@ source("modules/geral/geral-mapacoropletico.R")
 
 # Module UI ---------------------------------------------------------------
 
-visaogeralOutput <- function(id) {
+visaogeralUI <- function(id) {
   
   ns <- NS(id)
   
@@ -20,7 +20,7 @@ visaogeralOutput <- function(id) {
         barplotOutput(id = ns("barplot"))
       ),
       box(
-        title = "Mapa das pesquisas estaduis",
+        title = "Mapa das pesquisas estaduais",
         width = 6,
         height = 500,
         mapacoropleticoOutput(id = ns("mapa"))
