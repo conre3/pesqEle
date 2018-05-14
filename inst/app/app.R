@@ -5,10 +5,16 @@ library(shinydashboard)
 library(magrittr)
 library(ggplot2)
 
+
+# Functions ---------------------------------------------------------------
+
+source("utils/utils.R")
+
 # Modules -----------------------------------------------------------------
 
 source("modules/visao-geral.R")
 source("modules/counts.R")
+source("modules/estatisticos.R")
 
 # Data --------------------------------------------------------------------
 
@@ -60,8 +66,8 @@ ui <- dashboardPage(
     ),
     countsOutput(id = "contagens"),
     tabItems(
-      visaogeralOutput(id = "visao_geral"),
-      estatisticosOutput(id = "estatisticos")
+      visaogeralUI(id = "visao_geral"),
+      estatisticosUI(id = "estatisticos", df_pesq = df_pesq)
     )
   )
 )
