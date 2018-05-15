@@ -67,7 +67,7 @@ ui <- dashboardPage(
     countsOutput(id = "contagens"),
     tabItems(
       visaogeralUI(id = "visao_geral"),
-      estatisticosUI(id = "estatisticos", df_pesq = df_pesq)
+      estatisticosUI(id = "estatisticos")
     )
   )
 )

@@ -1,4 +1,4 @@
-real <- function(x) {
+real_format <- function(x) {
   
   stringr::str_c(
     "R$", 
