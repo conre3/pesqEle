@@ -1,19 +1,10 @@
 # Module UI ---------------------------------------------------------------
 
-selectStatInput <- function(id, df_pesq) {
+selectStatInput <- function(id) {
   
   ns <- NS(id)
   
-  stat_names <- df_pesq %>% 
-    dplyr::distinct(stat_nm) %>% 
-    dplyr::arrange(stat_nm) %>% 
-    purrr::flatten_chr()
-  
-  selectInput(
-    inputId = "stat_nm",
-    label = "Estatístico responsável",
-    choices = stat_names
-  )
+  uiOutput(ns("select"))
 
 }
 
@@ -21,17 +12,19 @@ selectStatInput <- function(id, df_pesq) {
 
 selectStat <- function(input, output, session, df_pesq) {
   
-  observeEvent(df_pesq(), {
+  output$select <- renderUI({
     
-    # stat_names <- df_pesq() %>% 
-    #   dplyr::distinct(stat_nm) %>% 
-    #   dplyr::arrange(stat_nm) %>% 
-    #   purrr::flatten_chr()
+    ns <- session$ns
     
-    updateSelectInput(
-      session,
-      "stat_nm",
-      choices = 7655
+    stat_names <- df_pesq() %>% 
+      dplyr::distinct(stat_nm) %>% 
+      dplyr::arrange(stat_nm) %>% 
+      purrr::flatten_chr()
+    
+    selectInput(
+      inputId = ns("stat_nm"),
+      label = "Estatístico responsável",
+      choices = stat_names
     )
     
   })
