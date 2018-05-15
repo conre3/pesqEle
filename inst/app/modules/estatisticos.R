@@ -3,10 +3,11 @@
 
 source("modules/estatisticos/tableStat.R")
 source("modules/estatisticos/selectStat.R")
+source("modules/estatisticos/statCounts.R")
 
 # Module UI ---------------------------------------------------------------
 
-estatisticosUI <- function(id, df_pesq) {
+estatisticosUI <- function(id) {
   ns <- NS(id)
   
   tabItem(
@@ -25,8 +26,16 @@ estatisticosUI <- function(id, df_pesq) {
         tabItem(
           tabName = "por_stat",
           title = "Por estatístico",
-          selectStatInput("stat_select", df_pesq)
-          #statCountsOutput("stat_counts")
+          selectStatInput(ns("stat_select")),
+          fluidRow(
+            column(
+              width = 8
+            ),
+            column(
+              width = 4,
+              statCountsOutput(ns("stat_counts"))
+            )
+          )
         )
       )
     )
@@ -49,6 +58,12 @@ estatisticos <- function(input, output, session, df_pesq) {
     module = selectStat,
     id = "stat_select",
     df_pesq = df_pesq
+  )
+  
+  callModule(
+    module = statCounts,
+    id = "stat_counts",
+    df_pesq = df_pesq_stat
   )
     
 }
