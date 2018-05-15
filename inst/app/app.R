@@ -35,14 +35,14 @@ ui <- dashboardPage(
         icon = shiny::icon("globe")
       ),
       menuItem(
-        text = "Estatísticos responsáveis",
-        tabName = "estatisticos",
-        icon = shiny::icon("info")
+        text = "Empresas",
+        tabName = "empresas",
+        icon = shiny::icon("building")
       ),
       menuItem(
-        text = "Valor das pesquisas",
-        tabName = "valor",
-        icon = shiny::icon("info")
+        text = "Estatísticos",
+        tabName = "estatisticos",
+        icon = shiny::icon("users")
       ),
       tags$hr(),
       radioButtons(

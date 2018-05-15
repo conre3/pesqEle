@@ -15,26 +15,28 @@ estatisticosUI <- function(id) {
     fluidRow(
       tabBox(
         width = 12,
-        tabItem(
-          tabName = "geral",
+        height = 470,
+        tabPanel(
           title = "Geral",
           tableStatOutput(ns("table_stat")),
           tags$hr(),
           tags$p("* Valor mediano cobrado por pesquisa."),
           tags$p("** Custo mediano por unidade amostral.")  
         ),
-        tabItem(
-          tabName = "por_stat",
+        tabPanel(
           title = "Por estatístico",
           selectStatInput(ns("stat_select")),
-          fluidRow(
-            column(
-              width = 8
-            ),
-            column(
-              width = 4,
-              statCountsOutput(ns("stat_counts"))
-            )
+          column(
+            style = "background-color: #ededed",
+            width = 9,
+            tags$br(),
+            tags$br(),
+            tags$br(),
+            tags$br()
+          ),
+          column(
+            width = 3,
+            statCountsOutput(ns("stat_counts"))
           )
         )
       )
