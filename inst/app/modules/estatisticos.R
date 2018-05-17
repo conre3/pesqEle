@@ -1,13 +1,13 @@
-
 # Modules -----------------------------------------------------------------
 
 source("modules/estatisticos/tableStat.R")
 source("modules/estatisticos/selectStat.R")
+source("modules/estatisticos/selectStatPesq.R")
 source("modules/estatisticos/statCounts.R")
 
 # Module UI ---------------------------------------------------------------
 
-estatisticosUI <- function(id) {
+estatisticosUI <- function(id, df_pesq = df_pesq) {
   ns <- NS(id)
   
   tabItem(
@@ -25,11 +25,11 @@ estatisticosUI <- function(id) {
         ),
         tabPanel(
           title = "Por estatístico",
-          selectStatInput(ns("stat_select")),
+          selectStatInput(ns("stat_select"), df_pesq = df_pesq),
           column(
             style = "background-color: #ededed",
             width = 9,
-            tags$br(),
+            selectStatPesqInput(ns("stat_pesq_select"), df_pesq = df_pesq),
             tags$br(),
             tags$br(),
             tags$br()
@@ -67,5 +67,14 @@ estatisticos <- function(input, output, session, df_pesq) {
     id = "stat_counts",
     df_pesq = df_pesq_stat
   )
+  
+  df_pesq_stat_pesqid <- callModule(
+    module = selectStatPesq,
+    id = "stat_pesq_select",
+    df_pesq = df_pesq_stat
+  )
+  
+
+
     
 }
