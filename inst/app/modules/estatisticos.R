@@ -4,6 +4,7 @@ source("modules/estatisticos/tableStat.R")
 source("modules/estatisticos/selectStat.R")
 source("modules/estatisticos/selectStatPesq.R")
 source("modules/estatisticos/statCounts.R")
+source("modules/estatisticos/pesqSummary.R")
 
 # Module UI ---------------------------------------------------------------
 
@@ -30,9 +31,11 @@ estatisticosUI <- function(id, df_pesq = df_pesq) {
             style = "background-color: #ededed",
             width = 9,
             selectStatPesqInput(ns("stat_pesq_select"), df_pesq = df_pesq),
-            tags$br(),
-            tags$br(),
-            tags$br()
+            tags$div(
+              style = "font-size = 11pt",
+              pesqSummaryOutput(ns("pesq_summary")),
+              tags$br()
+            )
           ),
           column(
             width = 3,
@@ -74,7 +77,10 @@ estatisticos <- function(input, output, session, df_pesq) {
     df_pesq = df_pesq_stat
   )
   
-
-
+  callModule(
+    module = pesqSummary,
+    id = "pesq_summary",
+    df_pesq = df_pesq_stat_pesqid
+  )
     
 }
