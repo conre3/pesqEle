@@ -14,3 +14,13 @@ median_price <- function(x) {
     round(2)
   
 }
+
+get_choices <- function(df, variable) {
+  
+  df %>%
+    dplyr::select(x = variable) %>% 
+    dplyr::distinct(x) %>% 
+    dplyr::arrange(x) %>% 
+    purrr::flatten_chr()
+  
+}
