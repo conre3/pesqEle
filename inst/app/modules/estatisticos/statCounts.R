@@ -16,9 +16,6 @@ statCountsOutput <- function(id) {
 
 statCounts <- function(input, output, session, df_pesq_stat) {
   
-  #red, yellow, aqua, blue, light-blue, green, navy, teal, olive, lime, orange, 
-  # fuchsia, purple, maroon, black.
-  
   output$num_pesquisas <- shinydashboard::renderInfoBox({
     shinydashboard::infoBox(
       title = "Pesquisas",

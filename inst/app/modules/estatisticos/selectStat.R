@@ -1,40 +1,38 @@
 # Module UI ---------------------------------------------------------------
 
-selectStatInput <- function(id) {
+selectStatInput <- function(id, df_pesq) {
   
   ns <- NS(id)
   
-  uiOutput(ns("select"))
-
+  selectInput(
+    inputId = ns("stat"),
+    label = "Estatístico responsável",
+    choices = get_choices(df_pesq, "stat_nm")
+  )
+  
 }
 
 # Module server -----------------------------------------------------------
 
 selectStat <- function(input, output, session, df_pesq) {
   
-  output$select <- renderUI({
+  observeEvent(df_pesq(), {
     
-    ns <- session$ns
-    
-    stat_names <- df_pesq() %>% 
-      dplyr::distinct(stat_nm) %>% 
-      dplyr::arrange(stat_nm) %>% 
-      purrr::flatten_chr()
-    
-    selectInput(
-      inputId = ns("stat_nm"),
-      label = "Estatístico responsável",
-      choices = stat_names
+    updateSelectInput(
+      session = session,
+      inputId = "stat",
+      choices = get_choices(df_pesq(), "stat_nm")
     )
     
   })
   
   df_pesq_stat <- reactive({
     
-    df_pesq() %>% 
-      dplyr::filter(stat_nm == input$stat_nm)
+    isolate(df_pesq()) %>% 
+      dplyr::filter(stat_nm == input$stat)
     
   })
 
   return(df_pesq_stat)
+  
 }
