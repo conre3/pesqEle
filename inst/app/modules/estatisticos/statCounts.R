@@ -38,7 +38,7 @@ statCounts <- function(input, output, session, df_pesq_stat) {
   
   output$valor_mediano <- shinydashboard::renderInfoBox({
     
-    valor <- median_price(df_pesq_stat()$pesq_val) %>% real_format
+    valor <- median_price(df_pesq_stat()$pesq_val) %>% format_real
     
     shinydashboard::infoBox(
       title = "Valor mediano",
