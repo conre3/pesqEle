@@ -23,7 +23,7 @@ df_pesq <- readr::read_rds("data/pesqEle2018.rds")
 # UI ----------------------------------------------------------------------
 
 ui <- dashboardPage(
-  header = dashboardHeader(title = "Pesquisas eleitorais"),
+  header = dashboardHeader(title = "Eleições gerais 2018"),
   skin = "black",
   title = "pesqEle",
   dashboardSidebar(
@@ -67,7 +67,7 @@ ui <- dashboardPage(
     countsOutput(id = "contagens"),
     tabItems(
       visaogeralUI(id = "visao_geral"),
-      estatisticosUI(id = "estatisticos")
+      estatisticosUI(id = "estatisticos", df_pesq = df_pesq)
     )
   )
 )
