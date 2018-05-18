@@ -51,7 +51,7 @@ ui <- dashboardPage(
         choiceNames = c(
           "Todas as pesquisas",
           "Apenas pesquisas estaduais",
-          "Apenas pesquisas estaduais"
+          "Apenas pesquisas nacionais"
           ),
         choiceValues = c("todas", "estaduais", "nacionais")
       )
