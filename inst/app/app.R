@@ -15,6 +15,7 @@ source("utils/utils.R")
 source("modules/visao-geral.R")
 source("modules/counts.R")
 source("modules/estatisticos.R")
+source("modules/empresas.R")
 
 # Data --------------------------------------------------------------------
 
@@ -67,7 +68,8 @@ ui <- dashboardPage(
     countsOutput(id = "contagens"),
     tabItems(
       visaogeralUI(id = "visao_geral"),
-      estatisticosUI(id = "estatisticos", df_pesq = df_pesq)
+      estatisticosUI(id = "estatisticos", df_pesq = df_pesq),
+      empresasUI(id = "empresas", df_pesq = df_pesq)
     )
   )
 )
@@ -103,6 +105,12 @@ server <- function(input, output, session) {
   callModule(
     module = estatisticos,
     id = "estatisticos",
+    df_pesq = df_pesq_filtrado
+  )
+  
+  callModule(
+    module = empresas,
+    id = "empresas",
     df_pesq = df_pesq_filtrado
   )
   

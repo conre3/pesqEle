@@ -30,7 +30,11 @@ mapacoropletico <- function(input, output, session, df_pesq) {
       dplyr::summarise(n_pesq = n()) %>%
       dplyr::rename(NM_ESTADO = info_uf) %>%
       dplyr::right_join(df_uf, by = "NM_ESTADO") %>% 
-      dplyr::mutate(n_pesq = ifelse(is.na(n_pesq), 0, n_pesq))
+      dplyr::mutate(n_pesq = ifelse(is.na(n_pesq), 0, n_pesq)) %>% 
+      dplyr::mutate(n_pesq = cut(
+        x = n_pesq, 
+        breaks = quantile(n_pesq),
+        include.lowest = TRUE))
     
   })
   
@@ -39,7 +43,7 @@ mapacoropletico <- function(input, output, session, df_pesq) {
     ggplot(df_aggr()) +
       geom_sf(aes(fill = n_pesq)) +
       theme_minimal() +
-      scale_fill_distiller(direction = 1) +
+      #scale_fill_distiller(direction = 1) +
       labs(fill = "Nº pesquisas")
   })
   
