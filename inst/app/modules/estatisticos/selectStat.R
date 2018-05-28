@@ -5,6 +5,7 @@ selectStatInput <- function(id, df_pesq) {
   ns <- NS(id)
   
   selectInput(
+    width = 400,
     inputId = ns("stat"),
     label = "Estatístico responsável",
     choices = get_choices(df_pesq, "stat_nm")

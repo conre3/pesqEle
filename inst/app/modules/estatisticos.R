@@ -26,7 +26,10 @@ estatisticosUI <- function(id, df_pesq = df_pesq) {
         ),
         tabPanel(
           title = "Por estatístico",
-          selectStatInput(ns("stat_select"), df_pesq = df_pesq),
+          column(
+            width = 12,
+            selectStatInput(ns("stat_select"), df_pesq = df_pesq)
+          ),
           column(
             style = "background-color: #ededed",
             width = 9,

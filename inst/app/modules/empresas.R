@@ -26,7 +26,10 @@ empresasUI <- function(id, df_pesq = df_pesq) {
         ),
         tabPanel(
           title = "Por empresa",
-          selectEmpInput(ns("emp_select"), df_pesq = df_pesq),
+          column(
+            width = 12,
+            selectEmpInput(ns("emp_select"), df_pesq = df_pesq)
+          ),
           column(
             style = "background-color: #ededed",
             width = 9,

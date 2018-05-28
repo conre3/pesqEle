@@ -4,6 +4,7 @@ selectEmpPesqInput <- function(id, df_pesq) {
   
   ns <- NS(id)
   
+  
   selectInput(
     inputId = ns("pesq"),
     label = "Pesquisa",
@@ -12,6 +13,7 @@ selectEmpPesqInput <- function(id, df_pesq) {
       "id_pesq"
     )
   )
+  
   
 }
 

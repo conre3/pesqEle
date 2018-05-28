@@ -5,6 +5,7 @@ selectEmpInput <- function(id, df_pesq) {
   ns <- NS(id)
   
   selectInput(
+    width = 750,
     inputId = ns("emp"),
     label = "Empresa",
     choices = get_choices(df_pesq, "comp_nm")
