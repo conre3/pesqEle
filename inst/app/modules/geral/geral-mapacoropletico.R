@@ -43,7 +43,7 @@ mapacoropletico <- function(input, output, session, df_pesq) {
     ggplot(df_aggr()) +
       geom_sf(aes(fill = n_pesq)) +
       theme_minimal() +
-      #scale_fill_distiller(direction = 1) +
+      scale_fill_brewer() +
       labs(fill = "Nº pesquisas")
   })
   
