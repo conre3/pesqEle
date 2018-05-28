@@ -1,6 +1,7 @@
 # Libraries ---------------------------------------------------------------
 
 library(shiny)
+library(shinyBS)
 library(shinydashboard)
 library(magrittr)
 library(ggplot2)
@@ -65,6 +66,11 @@ ui <- dashboardPage(
         type = "text/css",  
         href="https://use.fontawesome.com/releases/v5.0.9/css/all.css")
     ),
+    shinyjs::useShinyjs(),
+    shinyBS::bsPopover(
+      id = "placehodelr", 
+      title = "", 
+      content = "place-holder"),
     countsOutput(id = "contagens"),
     tabItems(
       visaogeralUI(id = "visao_geral"),
