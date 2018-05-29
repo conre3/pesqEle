@@ -3,6 +3,8 @@ pesqEle::cities
 pesqEle::pesq_download_cities(head(pesqEle::cities))
 
 
+
+
 datas <- seq(Sys.Date(), as.Date("2016-01-01"), by = -1)
 datas <- purrr::set_names(datas, datas)
 res <- pesq_download(datas)
