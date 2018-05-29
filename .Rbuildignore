@@ -5,3 +5,5 @@
 ^data-raw$
 ^README_files$
 ^vignettes/rsconnect$
+^README\.Rmd$
+^README-.*\.png$

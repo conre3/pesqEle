@@ -1,11 +1,15 @@
 Package: pesqEle
-Title: Scrape Elections Survey metadata from TSE platform
-Version: 0.0.1.0
+Title: Election Polls from Brazilian Superior Electoral Court
+Version: 0.0.2.9000
 Authors@R: as.person(c(
-    "Julio Trecenti <jtrecenti@jtrecenti.com> [aut, cre]", 
+    "Julio Trecenti <jtrecenti@curso-r.com> [aut, cre]", 
     "William Amorim <thewilliam89@gmail.com> [aut]"
   ))
-Description: Scrape Elections Survey metadata from TSE platform.
+Description: Downloads and parses data from official site on Supreme
+    Electoral Court in Brazil (Tribunal Superior Eleitoral, TSE). Data are 
+    collected from TSE site (<http://inter01.tse.jus.br/pesqele-publico/>). 
+    Latest update was in May 29, 2018. There are 184 registered polls, 
+    executed by 73 companies.
 Depends:
     R (>= 3.3)
 License: MIT + file LICENSE
@@ -25,17 +29,9 @@ Imports: plyr,
     magrittr,
     purrr,
     tibble,
-    abjData,
-    conreCNPJ,
     roxygen2(>= 5.0.1),
     SoundexBR,
-    fs,
-    glue,
-    progress,
     readr
-Remotes:
-    abjur/abjData,
-    conre3/conreCNPJ
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
