@@ -10,14 +10,33 @@ form_tse_estado <- function(estado = 'SP', vs) {
        'formPesquisa:j_idt51'='',
        'formPesquisa:filtroUf_focus'='',
        'formPesquisa:filtroUf_input'=estado,
-       'formPesquisa:selectCidades_focus'='',
-       'formPesquisa:selectCidades_input'='',
        'formPesquisa:eleicoes_focus'='',
-       'formPesquisa:eleicoes_input'='[selecione]',
+       'formPesquisa:eleicoes_input'='5',
        'formPesquisa:j_idt63_input'='',
        'formPesquisa:j_idt65_input'='',
        'javax.faces.ViewState'=vs)
 }
+
+form_tse_uf_2018 <- function(estado = 'SP', vs) {
+  list('javax.faces.partial.ajax'='true',
+       'javax.faces.source'='formPesquisa:idBtnPesquisar',
+       'javax.faces.partial.execute'='@all',
+       'javax.faces.partial.render'='formPesquisa formPesquisa:grupoPrincipal',
+       'formPesquisa:idBtnPesquisar'='formPesquisa:idBtnPesquisar',
+       'formPesquisa'='formPesquisa',
+       'formPesquisa:j_idt49'='',
+       'formPesquisa:j_idt51'='',
+       'formPesquisa:filtroUf_focus'='',
+       'formPesquisa:filtroUf_input'=estado,
+       'formPesquisa:selectCidades_focus'='',
+       'formPesquisa:selectCidades_input'='',
+       'formPesquisa:eleicoes_focus'='',
+       'formPesquisa:eleicoes_input'='5',
+       'formPesquisa:j_idt63_input'='',
+       'formPesquisa:j_idt65_input'='',
+       'javax.faces.ViewState'=vs)
+}
+
 
 form_tse_muni <- function(uf, muni, vs) {
   list('javax.faces.partial.ajax'='true',

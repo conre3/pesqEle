@@ -73,9 +73,7 @@ pesq_download_day <- function(date, path, uf = "") {
 
 pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
   dir.create(path, FALSE, TRUE)
-  pb <- progress::progress_bar$new(total = length(date))
   purrr::map_dfr(date, ~{
-    pb$tick()
     pesq_download_day(.x, path)
   }, .id = "date")
 }
@@ -89,7 +87,7 @@ pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
 #' this function will save one HTML file for each result plus the list of results.
 #' Otherwise, it will save just one HTML file showing zero results.
 #'
-#' @param cities \code{tibble} returned from \code{\link{pesq_download_cities}} or \code{\link{cities}}.
+#' @param cities \code{tibble} returned from \code{pesq_download_cities} or \code{cities}.
 #' @param path directory to save HTML files.
 #'
 #' For example, consider the city of Rio de Janeiro (code 60011).
@@ -103,38 +101,69 @@ pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
 #' 'ja foi' if the file already exists and 'erro' if there was an error.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(cities, package = 'pesqEle')
 #' head(cities)
 #' d_results <- pesq_download_cities(head(cities))
 #' }
-#'
-#' @export
 pesq_download_cities <- function(cities, path = 'data-raw/html') {
   dir.create(path, FALSE, TRUE)
   .f <- purrr::possibly(pesq_download_city, tibble::tibble(result = 'error'))
   ..f <- function(...) {
-    pb$tick()
     .f(...)
   }
   fmt <- "downloading [:bar] :percent eta: :eta"
   nm <- paste(cities[["uf"]], cities[["muni"]], sep = "_")
-  pb <- progress::progress_bar$new(total = nrow(cities), format = fmt)
   purrr::map2_dfr(purrr::set_names(cities[["uf"]], nm),
                   cities[["muni"]], ..f,
                   path = path, .id = ".id")
 }
 
-#' Viewstate
-#'
-#' Capture viewstate from response object.
-#'
-#' @param r response object.
 vs <- function(r) {
   r %>%
     httr::content('text') %>%
     xml2::read_html() %>%
     rvest::html_node(xpath = '//input[@id="javax.faces.ViewState"]') %>%
     rvest::html_attr('value')
+}
+
+pesq_download_2018_uf <- function(sigla, path) {
+  # funcao que baixa detalhes
+  f <- function(id, item) {
+    id <- stringr::str_replace_all(id, "[^A-Za-z0-9]+", "-")
+    arq_detalhe <- sprintf('%s/pesq_details_%s_%s.html', path, sigla, id)
+    if (!file.exists(arq_detalhe)) {
+      wd <- httr::write_disk(arq_detalhe, overwrite = TRUE)
+      body <- form_detalhar(item - 1L, sigla, "", vs(r0))
+      r_detalhe <- httr::POST(u, body = body, encode = 'form')
+      httr::GET(u_detalhar(), wd)
+      'OK'
+    } else {
+      'ja foi'
+    }
+  }
+  f <- purrr::possibly(f, "erro")
+  # acessa a pagina
+  message("Downloading ", sigla, "...")
+  .file <- stringr::str_glue("{path}/pesq_main_{sigla}.html")
+  u <- u_tse()
+  r0 <- httr::GET(u)
+  body_uf <- form_tse_estado(sigla, vs(r0))
+  r_muni <- httr::POST(u, body = body_uf, encode = 'form')
+  # pega resultados por UF
+  wd <- httr::write_disk(.file, overwrite = TRUE)
+  body <- form_tse_uf_2018(sigla, vs(r0))
+  r <- httr::POST(u, body = body, encode = "form", wd)
+  d_results <- parse_arq(.file)
+  # baixa detalhes
+  r_pags <- purrr::imap_chr(d_results$numero_de_identificacao, f)
+  tibble::tibble(pags = list(r_pags))
+}
+
+pesq_download_2018 <- function(path = "data-raw/html_2018") {
+  dir.create(path, FALSE, TRUE)
+  uf <- c(ufs(), "BR")
+  names(uf) <- uf
+  purrr::map_dfr(uf, pesq_download_2018_uf, path = path, .id = "uf")
 }
 
