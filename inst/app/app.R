@@ -17,6 +17,7 @@ source("modules/visao-geral.R")
 source("modules/counts.R")
 source("modules/estatisticos.R")
 source("modules/empresas.R")
+source("modules/sobre.R")
 
 # Data --------------------------------------------------------------------
 
@@ -46,6 +47,11 @@ ui <- dashboardPage(
         tabName = "estatisticos",
         icon = shiny::icon("users")
       ),
+      menuItem(
+        text = "Sobre",
+        tabName = "sobre",
+        icon = shiny::icon("info-circle")
+      ),
       tags$hr(),
       radioButtons(
         inputId = "abrangencia",
@@ -60,23 +66,29 @@ ui <- dashboardPage(
     )
   ),
   dashboardBody(
+    
     tags$head(
       tags$link(
         rel = "stylesheet", 
         type = "text/css",  
         href="https://use.fontawesome.com/releases/v5.0.9/css/all.css")
     ),
+    
     shinyjs::useShinyjs(),
     shinyBS::bsPopover(
       id = "placehodelr", 
       title = "", 
       content = "place-holder"),
+    
     countsOutput(id = "contagens"),
+    
     tabItems(
       visaogeralUI(id = "visao_geral"),
       estatisticosUI(id = "estatisticos", df_pesq = df_pesq),
-      empresasUI(id = "empresas", df_pesq = df_pesq)
+      empresasUI(id = "empresas", df_pesq = df_pesq),
+      sobreUI(id = "sobre")
     )
+    
   )
 )
 
@@ -99,7 +111,8 @@ server <- function(input, output, session) {
   callModule(
     module = counts,
     id = "contagens",
-    df_pesq = df_pesq_filtrado
+    df_pesq = df_pesq_filtrado,
+    tabs = reactive({input$tabs})
   )
   
   callModule(

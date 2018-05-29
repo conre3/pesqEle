@@ -5,6 +5,7 @@ countsOutput <- function(id) {
   ns <- NS(id)
   
   tags$div(
+    id = ns("contagens"),
     fluidRow(
       shinydashboard::infoBoxOutput(ns("num_pesquisas"), width = 3),
       shinyBS::bsPopover(
@@ -40,7 +41,7 @@ countsOutput <- function(id) {
 
 # Module server -----------------------------------------------------------
 
-counts <- function(input, output, session, df_pesq) {
+counts <- function(input, output, session, df_pesq, tabs) {
   
   output$num_pesquisas <- shinydashboard::renderInfoBox({
     shinydashboard::infoBox(
@@ -84,5 +85,14 @@ counts <- function(input, output, session, df_pesq) {
       fill = TRUE
     )
   })
+  
+  shiny::observeEvent(tabs(), {
+    if(tabs() == "") return(NULL)
+    if(tabs() == "sobre") {
+      shinyjs::hide("contagens", anim = TRUE) 
+    } else {
+      shinyjs::show("contagens", anim = TRUE)
+    }
+  }) 
   
 }
