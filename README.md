@@ -1,142 +1,115 @@
-[![Travis-CI Build
-Status](https://travis-ci.org/conre3/pesqEle.svg?branch=master)](https://travis-ci.org/conre3/pesqEle)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/conre3/pesqEle?branch=master&svg=true)](https://ci.appveyor.com/project/conre3/pesqEle)
 
+[![Travis-CI Build Status](https://travis-ci.org/conre3/pesqEle.svg?branch=master)](https://travis-ci.org/conre3/pesqEle) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/conre3/pesqEle?branch=master&svg=true)](https://ci.appveyor.com/project/conre3/pesqEle) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/pesqEle)](https://cran.r-project.org/package=pesqEle)
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 pesqEle
 =======
 
-Scraper de estatísticos registrados nas pesquisas do TSE.
+Scraper de estatísticos registrados nas pesquisas eleitorais do Tribunal Superior Eleitoral (TSE). O objetivo desse pacote é mostrar todas as pesquisas eleitorais registradas e algumas de suas características, com o fim de obter uma visão geral dos registros e identificar potenciais fraudes.
 
 Instalação
 ----------
 
-Este pacote não está disponível no CRAN. Para instalar, rode
+Você pode instalar o pesqEle from github com:
 
-    if (!require(devtools)) install.packages('devtools')
-    devtools::install_github('conre3/pesqEle')
+``` r
+# install.packages("devtools")
+devtools::install_github("conre3/pesqEle")
+```
 
-Utilização
-----------
+Quando esse pacote estiver no CRAN, você poderá instalá-lo rodando
 
-Esse pacote contém funções úteis para baixar informações do serviço
-[pesqEle](http://inter01.tse.jus.br/pesqele-publico/app/pesquisa/listarEstatisticos.xhtml)
-do TSE. Exemplo de utilização:
+``` r
+install.packages("pesqEle")
+```
 
-    library(pesqEle)
-    data(cities)
-    d_log <- pesq_download_cities(head(cities))
-    arqs_main <- dir('data-raw/html', 
-                     pattern = '[A-Z]{2}_[0-9]+\\.html',
-                     full.names = TRUE)
-    arqs_details <- dir('data-raw/html', 
-                        pattern = '[A-Z]{2}_[0-9]+_[0-9]+\\.html',
-                        full.names = TRUE)
-    d_main <- pesq_parse_main(arqs_main)
-    d_details <- pesq_parse_main(arqs_details)
+Exemplo
+-------
 
-As bases completas já foram baixadas e carregadas no pacote:
+A função `pe_2018()` Faz o download de todas as pesquisas de 2018 por raspagem de dados. Por padrão, os arquivos HTML são armazenados na pasta `data-raw/html_2018`, mas é possível alterar essa pasta pelo parâmetro `path=`.
 
--   `cities` contém a relação de cidades.
--   `pesq_main` contém informações básicas de cada pesquisa eleitoral.
--   `pesq_detalhes` contém detalhes de cada pesquisa eleitoral.
+``` r
+pe <- pe_2018("pasta")
+dplyr::glimpse(pe)
+```
 
-Veja `help(<bd>)` para mais detalhes.
+    Observations: 184
+    Variables: 24
+    $ id_seq             <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14...
+    $ id_pesq            <chr> "MA-05302/2018", "DF-03958/2018", "DF-06553/2...
+    $ info_uf            <chr> "MA", "DF", "DF", "PI", "PI", "SP", "SP", "PI...
+    $ info_election      <chr> "Eleições Gerais 2018", "Eleições Gerais 2018...
+    $ info_position      <chr> "", "Deputado Distrital", "Deputado Federal",...
+    $ comp_nm            <chr> "M R BORGES SERVICOS / MBO PUBLICIDADE, MARKE...
+    $ comp_cnpj          <chr> "00905916000190", "00850844000121", "00850844...
+    $ comp_contract_same <chr> "Sim", "Sim", "Sim", "Não", "Não", "Não", "Nã...
+    $ stat_id            <chr> "1791", "CONRE 1a. Região No. 9403", "CONRE 1...
+    $ stat_nm            <chr> "ANTONIO CARLOS RODRIGUES BARBOSA", "LUCIANA ...
+    $ pesq_n             <dbl> 10973, 3200, 3200, 320, 320, 601, 601, 320, 8...
+    $ pesq_val           <dbl> 15700, 32000, 32000, 3000, 3000, 6000, 0, 300...
+    $ pesq_contractors   <chr> "CNPJ: 00905916000190 - M R BORGES SERVICOS",...
+    $ pesq_origin        <chr> "Vazio", "Vazio", "Vazio", "Recursos proprios...
+    $ pesq_same          <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FAL...
+    $ dt_reg             <date> 2018-05-12, 2018-03-26, 2018-03-26, 2018-02-...
+    $ dt_pub             <date> 2018-05-18, 2018-04-01, 2018-04-01, 2018-02-...
+    $ dt_start           <date> 2018-03-26, 2018-03-21, 2018-03-21, 2018-02-...
+    $ dt_end             <date> 2018-05-04, 2018-03-30, 2018-03-30, 2018-02-...
+    $ txt_verif          <chr> "Sistema interno de controle e verificação, c...
+    $ txt_method         <chr> "METODOLOGIA: A pesquisa foi realizada median...
+    $ txt_about          <chr> "Trata-se de uma amostra não aleatória por co...
+    $ txt_plan           <chr> ". PLANO AMOSTRAL E INTERVALOS DE CONFIANÇA: ...
+    $ stat_unique        <chr> "1791_A535", "9403_L252", "9403_L252", "5102_...
 
-Histórico
+Ao rodar pela primeira vez, provavelmente o download demorará por volta de 15-20 minutos, dependendo da conexão com a internet. Nas próximas vezes o download é mais rápido pois o programa não baixa pesquisas já armazenadas em arquivos HTML.
+
+Se não quiser rodar a função `pe_2018()`, armazenamos os dados no objeto `pesqEle::pesqEle_2018`. Esse objeto é uma `data.frame()` com as mesmas colunas resultantes de `pe_2018()`. Essas variáveis são:
+
+-   Identificadores:
+    -   `id_seq`: ID sequencial
+    -   `id_pesq`: ID de registro da pesquisa
+-   Informações da eleição
+    -   `info_uf`: Unidade Federativa indicando abrangência da pesquisa ("BR" = Brasil)
+    -   `info_election`: Eleição (no caso, sempre 2018)
+    -   `info_position`: Cargo eleitoral
+-   Informações da empresa
+    -   `comp_nm`: Nome da empresa que realizou a pesquisa
+    -   `comp_cnpj`: CNPJ da empresa que realizou a pesquisa
+    -   `comp_contract_same`: Contratante é a própria empresa?
+-   Informações do estatístico responsável
+    -   `stat_id`: ID do estatístico
+    -   `stat_nm`
+    -   `stat_unique`: Código único do estatístico. Os nomes dos estatísticos estavam escritos de formas diferentes, então arrumamos utilizando o pacote `SoundexBR` e outras heurísticas. Nada garante que o pacote contenha mais erros nos nomes.
+-   Informações sobre a pesquisa
+    -   `pesq_n`: Tamanho da amostra.
+    -   `pesq_val`: Custo da pesquisa informado no registro.
+    -   `pesq_contractors`: Empresas que contrataram a pesquisa.
+    -   `pesq_origin`: Origem dos recursos da pesquisa.
+    -   `pesq_same`: Indica se o contratante da pesquisa é a própria empresa e a pesquisa foi realizada com recursos próprios (em 2018 não tem nenhuma).
+-   Datas
+    -   `dt_reg`: Data de registro da pesquisa.
+    -   `dt_pub`: Data de publicação da pesquisa.
+    -   `dt_start`: Data de início da pesquisa.
+    -   `dt_end`: Data de término da pesquisa.
+-   Informações adicionais (texto)
+    -   `txt_verif`, `txt_method`, `txt_about`, `txt_plan`: informações adicionais da pesquisa, geralmente em texto, sobre metodologia, aplicação e outros detalhes.
+
+Shiny App
 =========
 
-A [Consulta às Pesquisas Eleitorais por
-Estatístico](http://inter01.tse.jus.br/pesqele-publico/app/pesquisa/listarEstatisticos.xhtml)
-é uma ferramenta do TSE que permite consultar todas as pesquisas
-eleitorais realizadas no Brasil. A possibilidade de pesquisar pesquisas
-por nome do estatístico revelou uma série de fraudes, como a [inclusão
-indevida da presidente do CONRE-3 em mais de 20 pesquisas
-eleitorais](http://www.conre3.org.br/portal/3113-2/).
+Após instalar o pacote, você pode rodar o app do `pesqEle` rodando
 
-Análise da base de dados
-========================
+``` r
+shiny::runApp(system.file("app", package = "pesqEle"))
+```
 
-Foram baixadas duas bases principais. A primeira, aqui chamada
-`pesq_main` mostra informações básicas de cada pesquisa,
-especificamente: código identificador, nome fantasia da empresa
-contratada, nome e número de registro do estatístico, data de registro,
-município e UF. A segunda, chamada `pesq_details` está estruturada na
-forma 'key-value' e contém informações do plano amostral, custo e CNPJ
-da empresa responsável.
+Para rodar o app, além dos pacotes do `tidyverse` e `shiny`, você precisará instalar os pacotes `shinydashboard`, `highcharter`, `shinyBS` e `shinyjs`. Todos eles estão no CRAN e podem ser instalados via `install.packages()`.
 
-Base principal
---------------
+Cuidado
+=======
 
-Temos no total 8104 pesquisas registradas, envolvendo 453 nomes
-distintos de estatísticos responsáveis e 536 nomes distintos de
-empresas.
+Os nomes dos estatísticos estavam escritos de formas diferentes, então arrumamos utilizando o pacote [`SoundexBR`](https://github.com/danielmarcelino/SoundexBR) e outras heurísticas. Nada garante que o pacote contenha mais erros nos nomes.
 
-As Tabelas @ref(fig:stat20) e @ref(fig:emp20) mostram o volume de
-pesquisas registradas por nome do estatístico responsável e nome
-fantasia da empresa, respectivamente.
-
-![<br/>](README_files/figure-markdown_strict/stat20-1.png)
-
-![<br/>](README_files/figure-markdown_strict/emp20-1.png)
-
-A Figura @ref(fig:tempo) mostra o volume de pesquisas registradas
-diariamente.
-
-![Volume diário de pesquisas registradas.](README_files/figure-markdown_strict/tempo-1.png)
-
-A Figura @ref(fig:map) mostra a distribuição geográfica das pesquisas.
-Ainda falta arrumar 19 nomes que não bateram.
-
-![Distribuição geográfica das pesquisas registradas.](README_files/figure-markdown_strict/map-1.png)
-
-Base detalhada
---------------
-
-A Tabela @ref(fig:cnpj) mostra todas as 537 empresas que registraram
-pesquisas, ordenadas por volume de pesquisas. As 10 empresas com maior
-volume de pesquisas concentram 20% das pesquisas.
-
-![<br/>](README_files/figure-markdown_strict/cnpj-1.png)
-
-A Tabela @ref(tab:conre) confronta os CNPJs das empresas que realizaram
-pesquisas (somente em SP, PR, MT e MS) com a relação de empresas que
-estão registradas e em dia com o CONRE-3, o CONRE-4 ou o CONRE-6. A
-Tabela @ref(fig:conre2) mostra a relação das empresas que não estão
-registradas ou estão registradas e não estão em dia com o CONRE-3 ou
-CONRE-6. É importante mencionar que as empresas dessa relação podem ser
-registradas em conselhos de outras regiões.
-
-<table>
-<caption>Contagem de empresas registradas no CONRE-3, CONRE-4 ou CONRE-6 que registraram pesquisas no TSE (somente em SP, PR, MT e MS).</caption>
-<thead>
-<tr class="header">
-<th align="left">Registrado</th>
-<th align="right">n</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Não</td>
-<td align="right">104</td>
-</tr>
-<tr class="even">
-<td align="left">Sim</td>
-<td align="right">66</td>
-</tr>
-</tbody>
-</table>
-
-![<br/>](README_files/figure-markdown_strict/conre2-1.png)
-
-TODO
-
-- [ ] deploy do shiny
-- [ ] mandar para o CRAN
-- [ ] cron job pra baixar os dados automaticamente
-- [ ] fazer o pacote buildar e passar nos CI da vida
-
-License
+Licença
 =======
 
 MIT
