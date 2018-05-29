@@ -8,7 +8,8 @@ globalVariables(c('.', 'X1', 'X2', 'X3', 'X4', 'arq', 'cnpj',
                   'info_election', 'metodologia_pesquisa', 'municipio',
                   'n_entrevistados', 'numero_de_identificacao', 'origem',
                   'plano_amostral', 'result', 'sobre_municipio',
-                  'stat_id', 'stat_nm', 'temp', 'valor', 'verificacao'))
+                  'stat_id', 'stat_nm', 'temp', 'valor', 'verificacao',
+                  'stat_unique'))
 
 limpar_kv_spr <- function(d) {
   d %>%
