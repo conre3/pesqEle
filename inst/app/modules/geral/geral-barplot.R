@@ -18,10 +18,10 @@ barplot <- function(input, output, session, df_pesq) {
     df_pesq %>%
       dplyr::mutate(
         month = lubridate::month(dt_reg, label = TRUE),
-        abrangencia = ifelse(info_uf == "BRASIL", "nac", "est")
+        abrangencia = ifelse(info_uf == "BR", "nac", "est")
       ) %>%
       dplyr::count(abrangencia, month) %>% 
-      tidyr::spread(abrangencia, n) -> df_s
+      tidyr::spread(abrangencia, n)
   })
   
   output$plot <- highcharter::renderHighchart({

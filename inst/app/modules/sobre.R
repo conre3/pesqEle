@@ -55,14 +55,14 @@ sobreUI <- function(id) {
         column(
           width = 6,
           tags$a(
-            tags$img(src = "conre3.jpg", width = 200, height = 80),
+            tags$img(src = "conre3.jpg", width = 300, height = 80),
             href = "http://conre3.org.br/"
           )
         ),
         column(
           width = 6,
           tags$a(
-            tags$img(src = "cursor.png", width = 80, height = 80, align = "center"),
+            tags$img(src = "cursor.jpg", width = 80, height = 80, align = "center"),
             href = "http://curso-r.com"
           )
         )
