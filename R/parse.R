@@ -1,19 +1,14 @@
 #' Parse main results
 #'
-#' Parse main HTML files returned by \code{\link{pesq_download_cities}}
+#' Parse main HTML files returned by \code{pesq_download_cities}
 #' into \code{tibbles}.
 #'
 #' @param arqs character vector containing file paths. Valid files have \code{<UF>_<code>.html} format.
 #'
 #' @return \code{tibble} containing 8 columns.
-#'
-#' @export
 pesq_parse_main <- function(arqs) {
   f <- purrr::possibly(parse_arq, tibble::tibble(result = 'erro'))
-  tibble::tibble(arq = arqs) %>%
-    dplyr::group_by(arq) %>%
-    dplyr::do(f(.$arq)) %>%
-    dplyr::ungroup()
+  purrr::map_dfr(purrr::set_names(arqs, arqs), f, .id = "arq")
 }
 
 parse_arq <- function(arq) {
@@ -65,19 +60,15 @@ parse_detalhes_arq <- function(arq, rds = FALSE) {
 
 #' Parse details
 #'
-#' Parse details HTML files returned by \code{\link{pesq_download_cities}}
+#' Parse details HTML files returned by \code{pesq_download_cities}
 #' into \code{tibbles}.
 #'
 #' @param arqs character vector containing file paths. Valid files have \code{<UF>_<code>_<result_id>.html} format.
 #'
 #' @return \code{tibble} containing 3 columns.
 #'
-#' @export
 pesq_parse_details <- function(arqs) {
   f <- purrr::possibly(parse_detalhes_arq, tibble::tibble(result = 'erro'))
-  tibble::tibble(arq = arqs) %>%
-    dplyr::group_by(arq) %>%
-    dplyr::do(f(.$arq)) %>%
-    dplyr::ungroup()
+  purrr::map_dfr(purrr::set_names(arqs, arqs), f, .id = "arq")
 }
 

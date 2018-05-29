@@ -5,11 +5,10 @@
 #' Needs stable internet connection.
 #'
 #' @return \code{tibble} with two columns, state name and city code.
-#' There's a cached result in \code{\link{cities}}.
+#' There's a cached result in \code{cities}.
 #'
-#' @seealso \code{\link{cities}}.
+#' @seealso \code{cities}.
 #'
-#' @export
 pesq_city_codes <- function() {
   ufs <- c("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA",
            "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN",

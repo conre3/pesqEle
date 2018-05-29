@@ -1,5 +1,7 @@
 clean_stat_nm <- function(x) {
   x %>%
+    abjutils::rm_accent() %>% 
+    stringr::str_to_upper() %>% 
     stringr::str_remove_all("[^A-Z0-9 .-]") %>%
     stringr::str_replace_all(" DE | DOS | DA | DAS | DO ", " ") %>%
     stringr::str_squish()
@@ -12,9 +14,8 @@ id_fonema <- function(stat_id, stat_nm) {
   stat_nm <- clean_stat_nm(stat_nm)
   stat_id <- clean_stat_id(stat_id)
   fonema <- SoundexBR::soundexBR(stat_nm)
-  glue::glue("{stat_id}_{fonema}")
+  stringr::str_glue("{stat_id}_{fonema}")
 }
-
 clean_emp <- function(x) {
   re <- "(?<=CNPJ:\\s{1,5}[0-9]{14}\\s{1,3}-)((.|\n)+)"
   x %>%
@@ -22,17 +23,17 @@ clean_emp <- function(x) {
     stringr::str_squish() %>%
     stringr::str_to_upper()
 }
-
-
 pesq_tidy <- function(pesq_main, pesq_details) {
   re_origem <- "(?<=Origem do Recurso: )([a-zA-Z()\\s]+)"
   re_cnpj <- "(?<=CNPJ:\\s{1,5})([0-9]+)"
+  
   pesq_main_tidy <- pesq_main %>%
     dplyr::filter(numero_de_identificacao != 'Nenhum registro encontrado!') %>%
-    purrr::set_names(c('arq', 'id', 'empresa', 'dt_reg',
+    purrr::set_names(c('arq', 'id', 'empresa', 
                        'stat_id', 'stat_nm',
-                       'abrangencia', 'acoes')) %>%
+                       'dt_reg', 'abrangencia', 'acoes')) %>%
     dplyr::select(-acoes)
+  
   pesq_details_tidy <- pesq_details %>%
     dplyr::mutate(key = stringr::str_squish(key)) %>%
     tidyr::spread(key, val) %>%
@@ -87,8 +88,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     dplyr::group_by_at(dplyr::vars(-arq, -arq_id, -id)) %>%
     dplyr::slice(1) %>%
     dplyr::ungroup()
-  d_latlon <- abjData::dados_muni %>%
-    dplyr::mutate(municipio = toupper(abjutils::rm_accent(municipio)))
+  
   pesqEle2018 <- pesq_details_tidy %>%
     tibble::rowid_to_column("id_seq") %>%
     dplyr::select(
@@ -128,6 +128,11 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     dplyr::filter(info_election == "Elei\u00e7\u00f5es Gerais 2018") %>%
     tidyr::separate(id_pesq, c("info_uf", "temp"), "-", remove = FALSE) %>%
     dplyr::select(-temp) %>%
-    dplyr::mutate(id_unico = id_fonema(stat_id, stat_nm))
+    dplyr::mutate(stat_unique = id_fonema(stat_id, stat_nm)) %>% 
+    dplyr::group_by(stat_unique) %>% 
+    dplyr::mutate(stat_nm = clean_stat_nm(dplyr::first(stat_nm))) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::mutate(stat_nm = dplyr::if_else(
+      stat_nm == "7655", "AUGUSTO SILVA ROCHA", stat_nm))
   pesqEle2018
 }
