@@ -7,7 +7,7 @@
 pesq_download_cities(cities, path = "data-raw/html")
 }
 \arguments{
-\item{cities}{\code{tibble} returned from \code{\link{pesq_download_cities}} or \code{\link{cities}}.}
+\item{cities}{\code{tibble} returned from \code{pesq_download_cities} or \code{cities}.}
 
 \item{path}{directory to save HTML files.
 
@@ -31,10 +31,9 @@ this function will save one HTML file for each result plus the list of results.
 Otherwise, it will save just one HTML file showing zero results.
 }
 \examples{
-\dontrun{
+\donttest{
 data(cities, package = 'pesqEle')
 head(cities)
 d_results <- pesq_download_cities(head(cities))
 }
-
 }

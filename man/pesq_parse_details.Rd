@@ -13,6 +13,6 @@ pesq_parse_details(arqs)
 \code{tibble} containing 3 columns.
 }
 \description{
-Parse details HTML files returned by \code{\link{pesq_download_cities}}
+Parse details HTML files returned by \code{pesq_download_cities}
 into \code{tibbles}.
 }

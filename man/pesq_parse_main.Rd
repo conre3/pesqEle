@@ -13,6 +13,6 @@ pesq_parse_main(arqs)
 \code{tibble} containing 8 columns.
 }
 \description{
-Parse main HTML files returned by \code{\link{pesq_download_cities}}
+Parse main HTML files returned by \code{pesq_download_cities}
 into \code{tibbles}.
 }

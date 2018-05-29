@@ -8,7 +8,7 @@ pesq_city_codes()
 }
 \value{
 \code{tibble} with two columns, state name and city code.
-There's a cached result in \code{\link{cities}}.
+There's a cached result in \code{cities}.
 }
 \description{
 Downloads list of series according to TSE.
@@ -16,5 +16,5 @@ It is obtained automatically via web scraping.
 Needs stable internet connection.
 }
 \seealso{
-\code{\link{cities}}.
+\code{cities}.
 }
