@@ -4,6 +4,7 @@ library(shinyBS)
 library(shinydashboard)
 library(magrittr)
 library(ggplot2)
+library(sf)
 
 # Functions ---------------------------------------------------------------
 source("utils/utils.R")
