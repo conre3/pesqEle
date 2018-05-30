@@ -32,7 +32,7 @@ summaryEmp <- function(input, output, session, df_pesq) {
       "<br>",
       hulk("Valor"), ": ", format_real(df_pesq()$pesq_val), 
       "<br>",
-      hulk("Tamanho amostral"), ": ", format_real(df_pesq()$pesq_n), 
+      hulk("Tamanho amostral"), ": ", df_pesq()$pesq_n, 
       "<br>",
       hulk("Custo por unidade amostral"), ": ", 
       format_real(df_pesq()$pesq_val/df_pesq()$pesq_n), 
