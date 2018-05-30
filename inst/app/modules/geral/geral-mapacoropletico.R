@@ -46,7 +46,8 @@ mapacoropletico <- function(input, output, session, df_pesq) {
       geom_sf(aes(fill = n_pesq)) +
       theme_minimal() +
       scale_fill_brewer() +
-      labs(fill = "Nº pesquisas")
+      labs(fill = "Nº pesquisas") +
+      theme(axis.text = element_blank())
   })
   
 }
