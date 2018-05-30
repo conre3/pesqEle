@@ -156,6 +156,9 @@ pesq_download_2018_uf <- function(sigla, path) {
   r <- httr::POST(u, body = body, encode = "form", wd)
   d_results <- parse_arq(.file)
   # baixa detalhes
+  if (length(d_results$numero_de_identificacao) == 100L) {
+    warning("More than 100 results. We need to break the search.")
+  }
   r_pags <- purrr::imap_chr(d_results$numero_de_identificacao, f)
   tibble::tibble(pags = list(r_pags))
 }
