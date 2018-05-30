@@ -11,14 +11,6 @@ globalVariables(c('.', 'X1', 'X2', 'X3', 'X4', 'arq', 'cnpj',
                   'stat_id', 'stat_nm', 'temp', 'valor', 'verificacao',
                   'stat_unique'))
 
-limpar_kv_spr <- function(d) {
-  d %>%
-    dplyr::filter(!is.na(key)) %>%
-    tidyr::spread(key, val) %>%
-    janitor::clean_names() %>%
-    purrr::set_names(abjutils::rm_accent(names(.)))
-}
-
 limpar_kv <- function(d) {
   d %>%
     tibble::as_tibble() %>%
@@ -26,10 +18,22 @@ limpar_kv <- function(d) {
     dplyr::mutate(key = stringr::str_replace_all(key, ':$', ''))
 }
 
+remove_accents <- function(x) {
+  stringr::str_replace_all(iconv(x, to = "ASCII//TRANSLIT"), "[`'\"^~]", "")
+}
+
 ufs <- function() {
   c("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA",
     "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN",
     "RO", "RR", "RS", "SC", "SE", "SP", "TO")
+}
+
+parse_reais <- function(x) {
+  as.numeric(gsub(",", ".", gsub("[^0-9,]", "", x)))
+}
+
+clean <- function(x) {
+  gsub(" +", "_", gsub("[^a-z0-9]", " ", stringr::str_trim(tolower(x))))
 }
 
 #' Pipe operator
