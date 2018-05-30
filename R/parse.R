@@ -18,8 +18,8 @@ parse_arq <- function(arq) {
   tib <- tab %>%
     rvest::html_table() %>%
     tibble::as_tibble() %>%
-    janitor::clean_names() %>%
-    purrr::set_names(abjutils::rm_accent(names(.))) %>%
+    purrr::set_names(remove_accents) %>%
+    purrr::set_names(clean) %>% 
     dplyr::mutate_all(dplyr::funs(as.character))
   tib
 }
