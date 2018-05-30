@@ -5,12 +5,10 @@
 #   stringsAsFactors = FALSE,
 #   quiet = TRUE
 # )
-df_uf_link <- "https://www.dropbox.com/s/dzdw4p1vjolqot8/df_uf.rds?dl=1"
-message("Downloading shapefile...")
-tmp <- tempfile(pattern = "df_uf_", fileext = ".rds")
-httr::GET(df_uf_link, httr::write_disk(tmp, overwrite = TRUE), httr::progress())
-df_uf <- readr::read_rds(tmp)
-file.remove(tmp)
+
+message("Please install ufshape package first")
+message("devtools::install_github('jtrecenti/ufshape')")
+df_uf <- ufshape::df_uf
 
 # Module UI ---------------------------------------------------------------
 
