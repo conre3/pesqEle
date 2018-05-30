@@ -14,7 +14,7 @@ pesq_city_codes <- function() {
            "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN",
            "RO", "RR", "RS", "SC", "SE", "SP", "TO")
   u <- u_tse()
-  d_munis <- plyr::ldply(ufs, function(uf) {
+  d_munis <- purrr::map_dfr(ufs, function(uf) {
     r0 <- httr::GET(u)
     r <- httr::POST(u, body = form_tse_estado(uf, vs(r0)), encode = 'form')
     httr::content(r, "text")
@@ -25,7 +25,7 @@ pesq_city_codes <- function() {
       rvest::html_nodes(xpath = './select[@id="formPesquisa:selectCidades_input"]//option') %>%
       rvest::html_attr('value')
     tibble::tibble(uf = uf, muni = munis)
-  }, .progress = 'text')
+  })
   d_munis %>%
     dplyr::filter(muni != '') %>%
     tibble::as_tibble()
