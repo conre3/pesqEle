@@ -1,6 +1,6 @@
 clean_stat_nm <- function(x) {
   x %>%
-    abjutils::rm_accent() %>% 
+    remove_accents() %>% 
     stringr::str_to_upper() %>% 
     stringr::str_remove_all("[^A-Z0-9 .-]") %>%
     stringr::str_replace_all(" DE | DOS | DA | DAS | DO ", " ") %>%
@@ -38,7 +38,6 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     dplyr::mutate(key = stringr::str_squish(key)) %>%
     tidyr::spread(key, val) %>%
     dplyr::select(-result) %>%
-    janitor::clean_names() %>%
     purrr::set_names(c("arq",
                        "cargo",
                        "contratante_propria_empresa",
@@ -61,12 +60,10 @@ pesq_tidy <- function(pesq_main, pesq_details) {
                        "valor")) %>%
     dplyr::filter(eleicao == "Elei\u00e7\u00f5es Gerais 2018") %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("dt_")),
-                     dplyr::funs(lubridate::dmy)) %>%
+                     dplyr::funs(as.Date(., format = "%d/%m/%Y"))) %>%
     dplyr::mutate(n_entrevistados = as.numeric(n_entrevistados),
-                  valor = readr::parse_number(valor, locale = readr::locale(
-                    decimal_mark = ",", grouping_mark = "."
-                  ))) %>%
-    dplyr::mutate(contratantes = abjutils::rm_accent(contratantes)) %>%
+                  valor = parse_reais(valor)) %>%
+    dplyr::mutate(contratantes = remove_accents(contratantes)) %>%
     dplyr::mutate(preco_por_entrevistado = valor / n_entrevistados,
            origem = stringr::str_extract(contratantes, re_origem),
            origem = stringr::str_remove_all(origem, "[^a-zA-Z ]"),
