@@ -17,7 +17,7 @@ barplot <- function(input, output, session, df_pesq) {
     
     df_pesq %>%
       dplyr::mutate(
-        month = lubridate::month(dt_reg, label = TRUE),
+        month = lubridate::month(dt_reg, label = TRUE, locale = "pt_BR"),
         abrangencia = ifelse(info_uf == "BR", "nac", "est")
       ) %>%
       dplyr::count(abrangencia, month) %>% 
