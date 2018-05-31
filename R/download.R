@@ -101,11 +101,6 @@ pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
 #' 'ja foi' if the file already exists and 'erro' if there was an error.
 #'
 #' @examples
-#' \donttest{
-#' data(cities, package = 'pesqEle')
-#' head(cities)
-#' d_results <- pesq_download_cities(head(cities))
-#' }
 pesq_download_cities <- function(cities, path = 'data-raw/html') {
   dir.create(path, FALSE, TRUE)
   .f <- purrr::possibly(pesq_download_city, tibble::tibble(result = 'error'))
