@@ -7,7 +7,7 @@ Authors@R: c(
 Description: Downloads and parses data from official site on Supreme
     Electoral Court in Brazil (Tribunal Superior Eleitoral, TSE). Data are 
     collected from TSE site (<http://inter01.tse.jus.br/pesqele-publico/>). 
-    Latest update was in May 30, 2018. There are 186 registered polls, 
+    Latest update was in May 31, 2018. There are 186 registered polls, 
     conducted by 74 companies.
 Depends:
     R (>= 3.3)
