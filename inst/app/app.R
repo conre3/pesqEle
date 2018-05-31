@@ -45,6 +45,11 @@ ui <- dashboardPage(
         icon = shiny::icon("users")
       ),
       menuItem(
+        text = "Saiba mais",
+        href = "http://www.conre3.org.br/portal/pesquisa-eleitoral/",
+        icon = shiny::icon("lightbulb")
+      ),
+      menuItem(
         text = "Sobre",
         tabName = "sobre",
         icon = shiny::icon("info-circle")

@@ -18,14 +18,14 @@ countsOutput <- function(id) {
       shinyBS::bsPopover(
         id = ns("num_estatisticos"),
         title = "",
-        content = "Total de estatísticos registrados como resposáveis pelas pesquisas."
+        content = "Total de estatísticos registrados como responsáveis pelas pesquisas."
       ),
       
       shinydashboard::infoBoxOutput(ns("num_empresas"), width = 3),
       shinyBS::bsPopover(
         id = ns("num_empresas"),
         title = "",
-        content = "Total de empresas resposáveis pelas pesquisas."
+        content = "Total de empresas responsáveis pelas pesquisas."
       ),
       
       shinydashboard::infoBoxOutput(ns("valor_mediano"), width = 3),
