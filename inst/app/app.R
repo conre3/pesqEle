@@ -62,43 +62,43 @@ ui <- dashboardPage(
           "Todas as pesquisas",
           "Apenas pesquisas estaduais",
           "Apenas pesquisas nacionais"
-          ),
+        ),
         choiceValues = c("todas", "estaduais", "nacionais")
       )
     )
   ),
   dashboardBody(
-
+    
     tags$head(
       tags$link(
         rel = "stylesheet",
         type = "text/css",
         href="https://use.fontawesome.com/releases/v5.0.9/css/all.css")
     ),
-
+    
     shinyjs::useShinyjs(),
     shinyBS::bsPopover(
       id = "placehodelr",
       title = "",
       content = "place-holder"),
-
+    
     countsOutput(id = "contagens"),
-
+    
     tabItems(
       visaogeralUI(id = "visao_geral"),
       estatisticosUI(id = "estatisticos", df_pesq = df_pesq),
       empresasUI(id = "empresas", df_pesq = df_pesq),
       sobreUI(id = "sobre")
     )
-
+    
   )
 )
 
 # Server ------------------------------------------------------------------
 server <- function(input, output, session) {
-
+  
   df_pesq_filtrado <- reactive({
-
+    
     if(input$abrangencia == "todas") {
       df_pesq
     } else if(input$abrangencia == "estaduais") {
@@ -106,28 +106,28 @@ server <- function(input, output, session) {
     } else {
       dplyr::filter(df_pesq, info_uf == "BR")
     }
-
+    
   })
-
+  
   callModule(
     module = counts,
     id = "contagens",
     df_pesq = df_pesq_filtrado,
     tabs = reactive({input$tabs})
   )
-
+  
   callModule(
     module = visaogeral,
     id = "visao_geral",
     df_pesq = df_pesq
   )
-
+  
   callModule(
     module = estatisticos,
     id = "estatisticos",
     df_pesq = df_pesq_filtrado
   )
-
+  
   callModule(
     module = empresas,
     id = "empresas",
@@ -135,12 +135,12 @@ server <- function(input, output, session) {
   )
   
   output$download <- downloadHandler(
-    filename = "pesqEle_20180529.xlsx",
+    filename = stringr::str_glue("pesqEle_{as.character(Sys.Date())}.xlsx"),
     content = function(con) {
       writexl::write_xlsx(df_pesq_filtrado(), con)
     }
   )
-
+  
 }
 
 shinyApp(ui = ui, server = server)

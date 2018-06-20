@@ -1,6 +1,6 @@
 Package: pesqEle
 Title: Election Polls from Brazilian Superior Electoral Court
-Version: 0.0.2.9000
+Version: 0.0.2
 Authors@R: c(
     person("Julio", "Trecenti", role = c("aut","cre"), email = "jtrecenti@curso-r.com"),
     person("William", "Amorim", role = c("aut"), email = "thewilliam89@gmail.com"))

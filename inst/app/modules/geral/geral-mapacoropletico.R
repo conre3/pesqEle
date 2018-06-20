@@ -42,16 +42,14 @@ mapacoropletico <- function(input, output, session, df_pesq) {
   
   output$plot <- renderPlot({
     
-    p <- df_aggr() %>% 
-      dplyr::filter(uf %in% c("AC", "SE")) %>% 
+    df_aggr() %>% 
       # sf::st_simplify(dTolerance = 0.1) %>% 
-      ggplot(aes(label = uf)) +
+      ggplot() +
       geom_sf(aes(fill = n_pesq)) +
       theme_minimal() +
       scale_fill_brewer() +
       labs(fill = "Nº pesquisas") +
       theme(axis.text = element_blank())
-    p2 <- plotly::ggplotly(p)
   })
   
 }

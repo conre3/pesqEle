@@ -27,9 +27,7 @@ tableStat <- function(input, output, session, df_pesq) {
       ) %>% 
       DT::datatable(
         rownames = FALSE, 
-        options = list(
-          pageLength = 5,
-          language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Portuguese-Brasil.json'))
+        options = list(pageLength = 5)
       )
   })
   
