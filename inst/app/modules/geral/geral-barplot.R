@@ -15,13 +15,16 @@ barplot <- function(input, output, session, df_pesq) {
   
   df <- reactive({
     
-    df_pesq %>%
+    df_pesq() %>%
       dplyr::mutate(
         month = lubridate::month(dt_reg, label = TRUE),
-        abrangencia = ifelse(info_uf == "BR", "nac", "est")
+        abrangencia = ifelse(info_uf == "BR", "nac", "est"),
+        abrangencia = factor(abrangencia, levels = c("nac", "est"))
       ) %>%
       dplyr::count(abrangencia, month) %>% 
-      tidyr::spread(abrangencia, n)
+      tidyr::complete(abrangencia, month, fill = list(n = 0)) %>% 
+      dplyr::filter(month <= lubridate::month(Sys.Date(), label = TRUE)) %>% 
+      tidyr::spread(abrangencia, n, fill = 0)
   })
   
   output$plot <- highcharter::renderHighchart({
@@ -33,12 +36,12 @@ barplot <- function(input, output, session, df_pesq) {
       highcharter::hc_xAxis(categories = df_s$month) %>%
       highcharter::hc_add_series(
         df_s$est, 
-        name = "Pesquisas estaduais", 
+        name = "Pesquisas para outras posições", 
         showInLegend = TRUE,
         color = "#3399ff") %>% 
       highcharter::hc_add_series(
         df_s$nac, 
-        name = "Pesquisas nacionais", 
+        name = "Pesquisas para presidente", 
         showInLegend = TRUE,
         color = "#ff7f50")
     

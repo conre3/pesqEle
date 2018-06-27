@@ -60,10 +60,31 @@ ui <- dashboardPage(
         label = "Incluir",
         choiceNames = c(
           "Todas as pesquisas",
-          "Apenas pesquisas estaduais",
-          "Apenas pesquisas nacionais"
+          "Pesquisas para Governador, Senador, Deputado Federal e Deputado Estadual",
+          "Apenas pesquisas para presidente"
         ),
         choiceValues = c("todas", "estaduais", "nacionais")
+      ),
+      radioButtons(
+        inputId = "comp_contract_same",
+        label = "Contratante é a própria empresa?",
+        choiceNames = c(
+          "Todas as pesquisas",
+          "Sim",
+          "Não"
+        ),
+        choiceValues = c("todas", "sim", "nao")
+      ),
+      radioButtons(
+        inputId = "pesq_origin",
+        label = "Origem dos recursos",
+        choiceNames = c(
+          "Todas as pesquisas",
+          "Fundo partidário",
+          "Recursos próprios",
+          "Vazio"
+        ),
+        choiceValues = c("todas", "partido", "proprio", "vazio")
       )
     )
   ),
@@ -97,47 +118,80 @@ ui <- dashboardPage(
 # Server ------------------------------------------------------------------
 server <- function(input, output, session) {
   
-  df_pesq_filtrado <- reactive({
+  # df_pesq_filtrado <- reactive({
+  #   
+  #   d <- df_pesq
+  #   
+  #   # filtro abrangência
+  #   if(input$abrangencia == "estaduais") {
+  #     d <- dplyr::filter(df_pesq, info_uf != "BR")
+  #   } else if (input$abrangencia == "nacionais") {
+  #     d <- dplyr::filter(df_pesq, info_uf == "BR")
+  #   }
+  # 
+  #   d
+  # })
+  
+  df_plots <- reactive({
     
-    if(input$abrangencia == "todas") {
-      df_pesq
-    } else if(input$abrangencia == "estaduais") {
-      dplyr::filter(df_pesq, info_uf != "BR")
-    } else {
-      dplyr::filter(df_pesq, info_uf == "BR")
+    d <- df_pesq
+    
+    # filtro abrangência
+    if(input$abrangencia == "estaduais") {
+      d <- dplyr::filter(df_pesq, info_uf != "BR")
+    } else if (input$abrangencia == "nacionais") {
+      d <- dplyr::filter(df_pesq, info_uf == "BR")
     }
     
+    # filtro contrato
+    if (input$comp_contract_same == "sim") {
+      d <- dplyr::filter(d, comp_contract_same == "Sim")
+    } else if (input$comp_contract_same == "nao") {
+      d <- dplyr::filter(d, comp_contract_same == "Não")
+    }
+    
+    # filtro recursos
+    if (input$pesq_origin == "partido") {
+      d <- dplyr::filter(d, pesq_origin == "Fundo partidario")
+    } else if (input$pesq_origin == "proprio") {
+      d <- dplyr::filter(d, pesq_origin == "Recursos proprios")
+    } else if (input$pesq_origin == "vazio") {
+      d <- dplyr::filter(d, pesq_origin == "Vazio")
+    }
+    
+    d
   })
+  
   
   callModule(
     module = counts,
     id = "contagens",
-    df_pesq = df_pesq_filtrado,
+    df_pesq = df_plots,
     tabs = reactive({input$tabs})
   )
   
   callModule(
     module = visaogeral,
     id = "visao_geral",
-    df_pesq = df_pesq
+    df_pesq = df_plots
   )
   
   callModule(
     module = estatisticos,
     id = "estatisticos",
-    df_pesq = df_pesq_filtrado
+    df_pesq = df_plots
   )
   
   callModule(
     module = empresas,
     id = "empresas",
-    df_pesq = df_pesq_filtrado
+    df_pesq = df_plots
   )
   
   output$download <- downloadHandler(
     filename = stringr::str_glue("pesqEle_{as.character(Sys.Date())}.xlsx"),
     content = function(con) {
-      writexl::write_xlsx(df_pesq_filtrado(), con)
+      writexl::write_xlsx(df_plots(), con)
     }
   )
   

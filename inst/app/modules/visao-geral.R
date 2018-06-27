@@ -20,7 +20,7 @@ visaogeralUI <- function(id) {
         barplotOutput(id = ns("barplot"))
       ),
       box(
-        title = "Mapa das pesquisas estaduais",
+        title = "UFs de origem das pesquisas para Governador, Senador, Deputado Federal e Deputado Estadual",
         width = 6,
         height = 500,
         mapacoropleticoOutput(id = ns("mapa"))

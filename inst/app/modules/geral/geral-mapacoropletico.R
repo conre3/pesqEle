@@ -24,17 +24,20 @@ mapacoropleticoOutput <- function(id) {
 mapacoropletico <- function(input, output, session, df_pesq) {
   
   df_aggr <- reactive({
-    df_pesq %>% 
-      dplyr::filter(info_uf != "BR") %>%
+    
+    d <- df_pesq() %>% 
+      dplyr::filter(info_uf != "BR") %>% 
       dplyr::group_by(info_uf) %>%
       dplyr::summarise(n_pesq = n()) %>%
-      dplyr::rename(uf = info_uf) %>%
+      dplyr::rename(uf = info_uf)
+
+    d %>%
       dplyr::inner_join(pesqEle::ufs, "uf") %>% 
       dplyr::right_join(df_uf, by = "CD_GEOCUF") %>% 
       dplyr::mutate(n_pesq = ifelse(is.na(n_pesq), 0, n_pesq)) %>% 
       dplyr::mutate(n_pesq = cut(
         x = n_pesq, 
-        breaks = c(-1, quantile(n_pesq)),
+        breaks = c(-1, 0, 5, 10, 20, max(n_pesq)),
         include.lowest = TRUE
       )) %>% 
       dplyr::mutate(n_pesq = forcats::fct_recode(n_pesq, "0" = "[-1,0]"))
