@@ -17,7 +17,12 @@ source("modules/empresas.R")
 source("modules/sobre.R")
 
 # Data --------------------------------------------------------------------
-df_pesq <- pesqEle::pesqEle_2018
+u <- "https://github.com/conre3/pesqEle/raw/master/data/pesqEle_2018.rda"
+httr::GET(u, httr::write_disk("tmp.rda", overwrite = TRUE))
+load("tmp.rda")
+file.remove("tmp.rda")
+df_pesq <- pesqEle_2018
+
 
 # UI ----------------------------------------------------------------------
 dl <- tags$li(downloadButton("download", label = "Download"), 
