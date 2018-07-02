@@ -23,7 +23,12 @@ clean_emp <- function(x) {
     stringr::str_squish() %>%
     stringr::str_to_upper()
 }
+
 pesq_tidy <- function(pesq_main, pesq_details) {
+  re_abrang <- paste0("(?<!Vila |Jardim |Assis )",
+                         "[bB]rasil[. ]|",
+                         "(?<!Porto |Fundação )[Nn]acional")
+
   re_origem <- "(?<=Origem do Recurso: )([a-zA-Z()\\s]+)"
   re_cnpj <- "(?<=CNPJ:\\s{1,5})([0-9]+)"
   
@@ -128,6 +133,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     dplyr::mutate(stat_unique = id_fonema(stat_id, stat_nm)) %>% 
     dplyr::group_by(stat_unique) %>% 
     dplyr::mutate(stat_nm = clean_stat_nm(dplyr::first(stat_nm))) %>% 
+    dplyr::mutate(pesq_range = ifelse(stringr::str_detect(txt_about, re_abrang), "Nacional", "Outros")) %>% 
     dplyr::ungroup() %>% 
     dplyr::mutate(stat_nm = dplyr::if_else(
       stat_nm == "7655", "AUGUSTO SILVA ROCHA", stat_nm))
