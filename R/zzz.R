@@ -9,7 +9,7 @@ globalVariables(c('.', 'X1', 'X2', 'X3', 'X4', 'arq', 'cnpj',
                   'n_entrevistados', 'numero_de_identificacao', 'origem',
                   'plano_amostral', 'result', 'sobre_municipio',
                   'stat_id', 'stat_nm', 'temp', 'valor', 'verificacao',
-                  'stat_unique'))
+                  'stat_unique', 'txt_about'))
 
 limpar_kv <- function(d) {
   d %>%
