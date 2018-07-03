@@ -32,6 +32,7 @@ ui <- dashboardPage(
   skin = "black",
   title = "pesqEle",
   dashboardSidebar(
+    tags$p("Atualizado em: xx/xx/2018"),
     sidebarMenu(
       id = "tabs",
       menuItem(
@@ -60,6 +61,7 @@ ui <- dashboardPage(
         icon = shiny::icon("info-circle")
       ),
       tags$hr(),
+      # isso nao deveria se chamar abrangência, e sim tipo de pesquisa.
       radioButtons(
         inputId = "abrangencia",
         label = "Incluir",
@@ -69,6 +71,17 @@ ui <- dashboardPage(
           "Apenas pesquisas para presidente"
         ),
         choiceValues = c("todas", "estaduais", "nacionais")
+      ),
+      # abrangencia é diferente de tipo de pesquisa!
+      radioButtons(
+        inputId = "pesq_range",
+        label = "Abrangência",
+        choiceNames = c(
+          "Todas as pesquisas",
+          "Nacional",
+          "Outros (estadual, municipal)"
+        ),
+        choiceValues = c("todas", "nacional", "outros")
       ),
       radioButtons(
         inputId = "comp_contract_same",
@@ -141,11 +154,18 @@ server <- function(input, output, session) {
     
     d <- df_pesq
     
-    # filtro abrangência
+    # filtro tipo pesquisa
     if(input$abrangencia == "estaduais") {
       d <- dplyr::filter(df_pesq, info_uf != "BR")
     } else if (input$abrangencia == "nacionais") {
       d <- dplyr::filter(df_pesq, info_uf == "BR")
+    }
+    
+    # filtro abrangência (real)
+    if(input$pesq_range == "outros") {
+      d <- dplyr::filter(df_pesq, pesq_range != "Nacional")
+    } else if (input$pesq_range == "nacional") {
+      d <- dplyr::filter(df_pesq, pesq_range == "Nacional")
     }
     
     # filtro contrato
