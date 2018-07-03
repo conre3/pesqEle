@@ -21,6 +21,7 @@
    \item{pesq_val}{Poll cost}
    \item{pesq_contractors}{Poll contractors}
    \item{pesq_origin}{Poll origin}
+   \item{pesq_range}{Poll range: National or others}
    \item{pesq_same}{Is true when \code{comp_contract_same} is "Sim" and \code{pesq_origin} is "Recursos proprios"}
    \item{dt_reg}{Registry date}
    \item{dt_pub}{Publication date}

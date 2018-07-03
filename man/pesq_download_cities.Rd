@@ -30,10 +30,3 @@ When the search for one city returns one or more results,
 this function will save one HTML file for each result plus the list of results.
 Otherwise, it will save just one HTML file showing zero results.
 }
-\examples{
-\donttest{
-data(cities, package = 'pesqEle')
-head(cities)
-d_results <- pesq_download_cities(head(cities))
-}
-}
