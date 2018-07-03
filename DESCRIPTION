@@ -3,7 +3,8 @@ Title: Election Polls from Brazilian Superior Electoral Court
 Version: 0.0.2
 Authors@R: c(
     person("Julio", "Trecenti", role = c("aut","cre"), email = "jtrecenti@curso-r.com"),
-    person("William", "Amorim", role = c("aut"), email = "thewilliam89@gmail.com"))
+    person("William", "Amorim", role = c("aut"), email = "thewilliam89@gmail.com"),
+    person("Bruna", "Wundervald", role = c("ctb", "cph"), email = "brunadaviesw@gmail.com"))
 Description: Downloads and parses data from official site on Supreme
     Electoral Court in Brazil (Tribunal Superior Eleitoral, TSE). Data are 
     collected from TSE site (<http://inter01.tse.jus.br/pesqele-publico/>). 
