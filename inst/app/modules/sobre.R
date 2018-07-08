@@ -48,19 +48,20 @@ sobreUI <- function(id) {
           tags$p("Doutorando em Estatística")
         )
       ),
-      column(width = 2),
+      column(width = 3),
       box(
         title = "Apoio",
-        width = 8,
+        width = 6,
+        height = 170,
         column(
-          width = 6,
+          width = 9,
           tags$a(
             tags$img(src = "conre3.jpg", width = 300, height = 80),
             href = "http://conre3.org.br/"
           )
         ),
         column(
-          width = 6,
+          width = 3,
           tags$a(
             tags$img(src = "cursor.jpg", width = 80, height = 80, align = "center"),
             href = "http://curso-r.com"
