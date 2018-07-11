@@ -18,10 +18,6 @@
 #' @return \code{tibble} contaning the same variables as the  
 #'   \code{\link{pesqEle_2018}} database.
 #' 
-#' \donttest{
-#' path <- tempdir()
-#' pesqEle <- pe_2018(path)
-#' }
 #' @export
 pe_2018 <- function(path = "data-raw/html_2018") {
   message("Deleting old files...")

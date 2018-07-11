@@ -21,11 +21,6 @@ the internet connection.}
 \value{
 \code{tibble} contaning the same variables as the  
   \code{\link{pesqEle_2018}} database.
-
-\donttest{
-path <- tempdir()
-pesqEle <- pe_2018(path)
-}
 }
 \description{
 Downloads HTML files from
