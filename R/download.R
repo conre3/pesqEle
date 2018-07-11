@@ -99,8 +99,6 @@ pesq_download <- function(date = Sys.Date() - 1, path = "data-raw/html") {
 #'
 #' @return \code{tibble} containing download status: 'OK' if it ran well,
 #' 'ja foi' if the file already exists and 'erro' if there was an error.
-#'
-#' @examples
 pesq_download_cities <- function(cities, path = 'data-raw/html') {
   dir.create(path, FALSE, TRUE)
   .f <- purrr::possibly(pesq_download_city, tibble::tibble(result = 'error'))
@@ -124,12 +122,12 @@ vs <- function(r) {
 
 pesq_download_2018_uf <- function(sigla, path) {
   # funcao que baixa detalhes
-  f <- function(id, item) {
+  f <- function(id, item, dt) {
     id <- stringr::str_replace_all(id, "[^A-Za-z0-9]+", "-")
     arq_detalhe <- sprintf('%s/pesq_details_%s_%s.html', path, sigla, id)
     if (!file.exists(arq_detalhe)) {
       wd <- httr::write_disk(arq_detalhe, overwrite = TRUE)
-      body <- form_detalhar(item - 1L, sigla, "", vs(r0))
+      body <- form_detalhar(item - 1L, sigla, "", vs(r0), dt)
       r_detalhe <- httr::POST(u, body = body, encode = 'form')
       httr::GET(u_detalhar(), wd)
       'OK'
@@ -140,22 +138,29 @@ pesq_download_2018_uf <- function(sigla, path) {
   f <- purrr::possibly(f, "erro")
   # acessa a pagina
   message("Downloading ", sigla, "...")
-  .file <- stringr::str_glue("{path}/pesq_main_{sigla}.html")
-  u <- u_tse()
-  r0 <- httr::GET(u)
-  body_uf <- form_tse_estado(sigla, vs(r0))
-  r_muni <- httr::POST(u, body = body_uf, encode = 'form')
   # pega resultados por UF
-  wd <- httr::write_disk(.file, overwrite = TRUE)
-  body <- form_tse_uf_2018(sigla, vs(r0))
-  r <- httr::POST(u, body = body, encode = "form", wd)
-  d_results <- parse_arq(.file)
+  # quebra pesquisas para nao dar mais de 100 results
+  datas <- list(c("01/01/2016", "30/06/2018"), c("01/07/2018", "31/12/2019"))
+  d_results <- purrr::imap_dfr(datas, ~{
+    u <- u_tse()
+    r0 <- httr::GET(u)
+    body_uf <- form_tse_estado(sigla, vs(r0), .x)
+    r_muni <- httr::POST(u, body = body_uf, encode = 'form')
+    
+    message("Data", .y, "...")
+    .file <- stringr::str_glue("{path}/pesq_main_{sigla}_{.y}.html")
+    wd <- httr::write_disk(.file, overwrite = TRUE)
+    body <- form_tse_uf_2018(sigla, vs(r0), .x)
+    r <- httr::POST(u, body = body, encode = "form", wd)
+    d_results <- parse_arq(.file)
+    r_pags <- purrr::imap_chr(d_results$numero_de_identificacao, f, dt = .x)
+    tibble::tibble(pags = list(r_pags))
+  })
   # baixa detalhes
-  if (length(d_results$numero_de_identificacao) == 100L) {
-    warning("More than 100 results. We need to break the search.")
-  }
-  r_pags <- purrr::imap_chr(d_results$numero_de_identificacao, f)
-  tibble::tibble(pags = list(r_pags))
+  # if (length(d_results$numero_de_identificacao) == 100L) {
+  #   warning("More than 100 results. We need to break the search.")
+  # }
+  
 }
 
 pesq_download_2018 <- function(path = "data-raw/html_2018") {

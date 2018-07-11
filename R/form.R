@@ -1,4 +1,4 @@
-form_tse_estado <- function(estado = 'SP', vs) {
+form_tse_estado <- function(estado = 'SP', vs, dt) {
   list('javax.faces.partial.ajax'='true',
        'javax.faces.source'='formPesquisa:filtroUf',
        'javax.faces.partial.execute'='formPesquisa:filtroUf',
@@ -12,12 +12,12 @@ form_tse_estado <- function(estado = 'SP', vs) {
        'formPesquisa:filtroUf_input'=estado,
        'formPesquisa:eleicoes_focus'='',
        'formPesquisa:eleicoes_input'='5',
-       'formPesquisa:j_idt63_input'='',
-       'formPesquisa:j_idt65_input'='',
+       'formPesquisa:j_idt63_input'=dt[1],
+       'formPesquisa:j_idt65_input'=dt[2],
        'javax.faces.ViewState'=vs)
 }
 
-form_tse_uf_2018 <- function(estado = 'SP', vs) {
+form_tse_uf_2018 <- function(estado = 'SP', vs, dt) {
   list('javax.faces.partial.ajax'='true',
        'javax.faces.source'='formPesquisa:idBtnPesquisar',
        'javax.faces.partial.execute'='@all',
@@ -32,8 +32,8 @@ form_tse_uf_2018 <- function(estado = 'SP', vs) {
        'formPesquisa:selectCidades_input'='',
        'formPesquisa:eleicoes_focus'='',
        'formPesquisa:eleicoes_input'='5',
-       'formPesquisa:j_idt63_input'='',
-       'formPesquisa:j_idt65_input'='',
+       'formPesquisa:j_idt63_input'=dt[1],
+       'formPesquisa:j_idt65_input'=dt[2],
        'javax.faces.ViewState'=vs)
 }
 
@@ -58,7 +58,7 @@ form_tse_muni <- function(uf, muni, vs) {
        'javax.faces.ViewState'=vs)
 }
 
-form_detalhar <- function(item, uf = "", muni = "", vs, date = "") {
+form_detalhar <- function(item, uf = "", muni = "", vs, dt = "") {
   l <- list('javax.faces.partial.ajax'='true',
        'javax.faces.source'=sprintf('formPesquisa:tabelaPesquisas:%d:detalhar', item),
        'javax.faces.partial.execute'='@all',
@@ -74,6 +74,8 @@ form_detalhar <- function(item, uf = "", muni = "", vs, date = "") {
        'formPesquisa:eleicoes_input'='[selecione]',
        'formPesquisa:j_idt64_input'='',
        'formPesquisa:j_idt66_input'='',
+       "formPesquisa:j_idt63_input"=dt[1],
+       "formPesquisa:j_idt65_input"=dt[2],
        'javax.faces.ViewState'=vs)
   names(l) <- sprintf(names(l), item)
   l

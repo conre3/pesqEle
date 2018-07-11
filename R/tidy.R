@@ -87,6 +87,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     dplyr::ungroup() %>%
     dplyr::mutate(cnpj = stringr::str_extract(empresa_contratada, re_cnpj),
            emp_nm = clean_emp(empresa_contratada)) %>%
+    # pq isso aqui estava sendo feito?
     dplyr::group_by_at(dplyr::vars(-arq, -arq_id, -id)) %>%
     dplyr::slice(1) %>%
     dplyr::ungroup()
