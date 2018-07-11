@@ -141,19 +141,18 @@ pesq_download_2018_uf <- function(sigla, path) {
   # pega resultados por UF
   # quebra pesquisas para nao dar mais de 100 results
   datas <- list(c("01/01/2016", "30/06/2018"), c("01/07/2018", "31/12/2019"))
+  u <- u_tse()
+  r0 <- httr::GET(u)
   d_results <- purrr::imap_dfr(datas, ~{
-    u <- u_tse()
-    r0 <- httr::GET(u)
     body_uf <- form_tse_estado(sigla, vs(r0), .x)
     r_muni <- httr::POST(u, body = body_uf, encode = 'form')
-    
     message("Data", .y, "...")
     .file <- stringr::str_glue("{path}/pesq_main_{sigla}_{.y}.html")
     wd <- httr::write_disk(.file, overwrite = TRUE)
     body <- form_tse_uf_2018(sigla, vs(r0), .x)
     r <- httr::POST(u, body = body, encode = "form", wd)
-    d_results <- parse_arq(.file)
-    r_pags <- purrr::imap_chr(d_results$numero_de_identificacao, f, dt = .x)
+    res <- parse_arq(.file)
+    r_pags <- purrr::imap_chr(res$numero_de_identificacao, f, dt = .x)
     tibble::tibble(pags = list(r_pags))
   })
   # baixa detalhes
