@@ -32,7 +32,7 @@ ui <- dashboardPage(
   skin = "black",
   title = "pesqEle",
   dashboardSidebar(
-    tags$p("Atualizado em: xx/xx/2018"),
+    tags$p(align="center", "Atualizado em: 31/08/2018"),
     sidebarMenu(
       id = "tabs",
       menuItem(
@@ -128,8 +128,21 @@ ui <- dashboardPage(
       estatisticosUI(id = "estatisticos", df_pesq = df_pesq),
       empresasUI(id = "empresas", df_pesq = df_pesq),
       sobreUI(id = "sobre")
-    )
+    ),
     
+    tags$span(
+      style = "position:fixed; right:18px; bottom:10px; 
+      z-index:10; height:30px;",
+      tags$a(
+        href = "https://www.curso-r.com/",
+        target = "_blank",
+        tags$img(
+          src = "cursor.jpg",
+          style = "height:100%; border-radius: 50%;",
+          " Powered by curso-r"
+        )
+      )
+    )
   )
 )
 
