@@ -25,8 +25,8 @@ clean_emp <- function(x) {
 }
 
 pesq_tidy <- function(pesq_main, pesq_details) {
-  re_abrang <- paste0("(?<!Vila |Jardim |Assis )",
-                         "[bB]rasil[. ]|",
+  re_abrang <- paste0("(?<!Vila |Jardim |Assis |Jd\\. )",
+                         "[bB]rasil[. ](?!Novo)|",
                          "(?<!Porto |Funda\u00e7\u00e3o )[Nn]acional")
 
   re_origem <- "(?<=Origem do Recurso: )([a-zA-Z()\\s]+)"
