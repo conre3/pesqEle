@@ -140,7 +140,11 @@ pesq_download_2018_uf <- function(sigla, path) {
   message("Downloading ", sigla, "...")
   # pega resultados por UF
   # quebra pesquisas para nao dar mais de 100 results
-  datas <- list(c("01/01/2016", "30/06/2018"), c("01/07/2018", "31/12/2019"))
+  datas <- list(c("01/01/2016", "30/06/2018"), 
+                c("01/07/2018", "31/07/2018"),
+                c("01/08/2018", "15/08/2018"),
+                c("16/08/2018", "31/08/2018"),
+                c("01/09/2018", "31/12/2019"))
   u <- u_tse()
   r0 <- httr::GET(u)
   d_results <- purrr::imap_dfr(datas, ~{
