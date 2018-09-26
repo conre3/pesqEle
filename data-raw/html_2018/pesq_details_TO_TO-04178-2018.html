@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/bootstrap/bootstrap.min.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/timeline/timeline.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/chart/morris.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/sepel2.site.base.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/pesqele.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/font-awesome.min.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/primefaces.css.xhtml?ln=primefaces&amp;v=5.1" /><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/primefaces.js.xhtml?ln=primefaces&amp;v=5.1"></script>
+			<title></title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<link rel="shortcut icon" href="http://www.tse.jus.br/internet/img/favicon.ico" type="image/x-icon" />
+			<!-- Bootstrap CSS -->
+		    <!-- Timeline CSS -->
+		    <!-- Morris Charts CSS -->
+			<!-- Cand CSS -->
+		    <!-- Custom Fonts --></head><body><div id="j_idt15" class="ui-dialog ui-widget ui-widget-content ui-overlay-hidden ui-corner-all ui-shadow"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="j_idt15_title" class="ui-dialog-title"></span></div><div class="ui-dialog-content ui-widget-content"><span id="groupAviso">
+					<div class="modal-body" align="center"><img id="j_idt17" src="/pesqele-publico/javax.faces.resource/wait.gif.xhtml?ln=images" alt="" /><img id="j_idt18" width="20" alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /><label id="j_idt19" class="ui-outputlabel ui-widget">Por favor, aguarde...</label>
+					</div></span></div></div><script id="j_idt15_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","barraProgresso",{id:"j_idt15",widgetVar:"barraProgresso",modal:true,width:"300",height:"120",appendTo:"@(body)"});});</script>
+			<!-- CABE&Ccedil;ALHO --><html xmlns="http://www.w3.org/1999/xhtml"><body>
+		<div id="siteCabecalho" class="navbar navbar-default navbar-fixed-top site-cabecalho">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#siteCabecalhoMenu" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/pesqele-publico"><img id="j_idt25" src="/pesqele-publico/javax.faces.resource/topo-tse.png.xhtml?ln=images" class="site-cabecalho-logo" alt="Logo do TSE" /> 
+							<span class="site-cabecalho-titulo">PesqEle Público</span>
+							<span class="site-cabecalho-titulo-vermelho"></span>
+					</a>
+					<div class="site-versao-nome">2018.01.01</div>
+				</div>
+			</div>
+		</div></body>
+</html>
+			<div id="sitePrincipal" class="container-fluid site-principal">
+				<div id="wrapper">
+					<div id="page-content-wrapper"><div id="msg" class="ui-messages ui-widget" aria-live="polite"></div>
+<form id="j_idt33" name="j_idt33" method="post" action="/pesqele-publico/app/pesquisa/detalhar.xhtml" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt33" value="j_idt33" />
+
+			<p style="float: right;"><button id="j_idt33:j_idt35" name="j_idt33:j_idt35" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="PrimeFaces.ab({s:'j_idt33:j_idt35',onst:function(cfg){PF('barraProgresso').show();;},onsu:function(data,status,xhr){PF('barraProgresso').hide();;}});return false;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-back"></span><span class="ui-button-text ui-c">Voltar</span></button><script id="j_idt33:j_idt35_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_j_idt35",{id:"j_idt33:j_idt35",widgetVar:"widget_j_idt33_j_idt35"});</script><img id="j_idt33:j_idt36" width="5px;" alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /><button id="j_idt33:j_idt37" name="j_idt33:j_idt37" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="imprimir();;" type="button"><span class="ui-button-icon-left ui-icon ui-c ui-icon-print"></span><span class="ui-button-text ui-c">Imprimir</span></button><script id="j_idt33:j_idt37_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_j_idt37",{id:"j_idt33:j_idt37",widgetVar:"widget_j_idt33_j_idt37"});</script>
+			</p>
+			<br /><br /><fieldset id="j_idt33:j_idt39" class="ui-fieldset ui-widget ui-widget-content ui-corner-all ui-hidden-container" style="margin-left: 10px;" data-widget="widget_j_idt33_j_idt39"><div class="ui-fieldset-content">
+				<div id="print">
+					<H4 align="center">Visualizar Pesquisa Eleitoral - TO-04178/2018</H4>
+					<H5 align="center">TOCANTINS</H5><table id="j_idt33:camposPesquisa" cellpadding="10" width="100%">
+<tbody>
+<tr>
+<td>
+						<label>Número de identificação:</label></td>
+<td>TO-04178/2018</td>
+<td>
+						<label>Data de registro:</label></td>
+<td>25/09/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Cargo(s):</label></td>
+<td>Governador, Senador</td>
+<td>
+						<label>Data de divulgação:</label></td>
+<td>01/10/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Empresa contratada/ Nome Fantasia:</label></td>
+<td>CNPJ: 10501739000130 - 
+							M A R DA ROCHA - MARKETING - ME / FOLHA CAPITAL</td>
+<td>
+						<label>Eleição:</label></td>
+<td>Eleições Gerais 2018</td>
+</tr>
+<tr>
+<td>
+						<label>Entrevistados:</label></td>
+<td>360</td>
+<td>
+						<label>Data de início da pesquisa:</label></td>
+<td>27/09/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Data de término da pesquisa:</label></td>
+<td>27/09/2018</td>
+<td>
+						<label>Estatístico responsável:</label></td>
+<td>JOÃO SOARES DE ARAÚJO NETO</td>
+</tr>
+<tr>
+<td>
+						<label>Registro do estatístico no CONRE:</label></td>
+<td>6892</td>
+<td><label id="j_idt33:j_idt72" class="ui-outputlabel ui-widget">Valor:</label></td>
+<td>R$ 5.000,00</td>
+</tr>
+<tr>
+<td><label id="j_idt33:j_idt74" class="ui-outputlabel ui-widget">Contratante é a própria empresa?</label></td>
+<td>Sim (Nota fiscal não exigida)</td>
+</tr>
+</tbody>
+</table>
+
+					<br /><table>
+<tbody>
+<tr>
+<td class="colunas"><label id="j_idt33:j_idt78" class="ui-outputlabel ui-widget">Contratante(s): </label></td>
+<td><img id="j_idt33:j_idt80" width="5px; " alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /> CNPJ: 10501739000130 - M A R DA ROCHA - MARKETING - ME</td>
+</tr>
+<tr>
+<td class="colunas"><label id="j_idt33:j_idt84" class="ui-outputlabel ui-widget">Pagante(s) do trabalho: </label></td>
+<td><img id="j_idt33:j_idt86" width="5px; " alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /> CNPJ: 10501739000130 - M A R DA ROCHA - MARKETING - ME</td>
+</tr>
+</tbody>
+</table>
+
+					<br /><table>
+<tbody>
+<tr>
+<td>
+						<label>Metodologia de pesquisa:</label></td>
+</tr>
+<tr>
+<td>I.1)Objetivo ¿ Identificar a intenção de voto dos eleitores do município de Porto Nacional, com relação ao aos candidatos ao Governo do Estado e ao Senado, através de entrevistas diretas junto ao eleitorado.
+
+Essas terão por objetivo, aferir de forma estimulada a aceitação e/ou rejeição dos candidatos postulantes aos cargos eletivos.
+
+I.2)Procedimentos para a realização da Pesquisa ¿ Realização de entrevistas diretas junto ao eleitorado do município, aplicando-se questionários estruturados, nos domicílios(90%) e áreas públicas(10%), na zona urbana do município. 
+
+A seleção das entrevistas utilizará o critério de aleatoriedade no sorteio dos entrevistados que irão compor o painel amostral, tendo por objetivo minimizar a tendenciosidade e os possíveis viés, que são passíveis de ocorrerem em trabalhos de pesquisas de campo.
+
+O número de questionários aplicados, terá por base uma amostra significativa e representativa do eleitorado cadastrado no município associado aos respectivos setores de coleta, tendo por base o número de eleitores informado pelo TRE/TO, tendo por referência o mês de Julho do ano corrente, e o Censo/2010 realizado nas áreas do município objeto da Pesquisa.</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>Plano amostral e ponderação quanto a sexo, idade, grau de instrução e nível econômico do entrevistado; intervalo de confiança e margem de erro:</label></td>
+</tr>
+<tr>
+<td>II.1)Descrição ¿ Foi elaborado utilizando-se o critério de AAS(Amostragem Aleatória Simples), com p e q máximos, tendo por objetivo o dimensionamento maximizado da amostra, para a redução de erros e a consequente obtenção de uma amostra significativa em relação a população componente do universo pesquisado. Apresentando resultados confiáveis e representativos do fenômeno objeto da Pesquisa.
+A distribuição dos questionários nos setores a serem pesquisados, considerou a proporcionalidade de moradores associados as cotas(variáveis) com relação ao universo de eleitores do município.
+
+A pesquisa foi dimensionada para uma amostra com Margem de Confiança de 95% e Erro Amostral de 3,0 pontos percentuais para mais ou para menos, totalizando 600 questionários.
+
+II.2) Distribuição dos questionários por Setores e por cotas(sexo, faixa etária, grau de instrução e renda per capita) ¿ Os questionários foram distribuídos pelos Setores da seguinte forma:
+
+1)Setor I ¿ 25%(150 questionários);
+2)Setor II ¿ 45%(270 questionários);
+3)Setor III ¿ 24%(144 questionários).
+4)setor IV ¿ 6%(36 questionários).
+II.2.1)Por Sexo ¿ 48% Masculino e 52% Feminino.
+
+II.2.2)Por Faixa Etária ¿ 16 a 24 anos ¿ 28%(46% masc. ,54% fem.);
+                                        25 a 34 anos ¿ 23%(52% masc. ,  48% fem);
+                                        35 a 44 anos ¿ 19%(51% masc. ,  49% fem.);
+                                        45 a 59 anos ¿ 17%(50% masc. ,  50% fem.);
+                                   60 anos ou mais ¿13%(48%  masc. , 52% fem.).
+  
+II.2.3) Por Grau de Instrução ¿ Analfabeto ¿ 9%(48% masc. , 52% fem.);
+                                                Fundamental ¿ 44%(54% masc. ,46% fem.);
+                                                Médio           - 37%(47% masc. , 53% fem.);
+                                                Superior        - 10%(45% masc. , 55% fem.).
+
+
+
+II.2.4)Renda Per Capita( Sal. Mínimo) ¿    Até ½       - 12%;
+                                                              Mais de ½ a 1 ¿ 34%;
+                                                              Mais de 1 a  2 ¿ 29%;  
+                                                              Mais de 2 a  3 ¿ 9%;
+                                                              Mais de 3 a  5 ¿ 9%;
+                                                              Mais de 5 a  10 ¿ 5%;
+                                                              Mais de 10        ¿ 2%;
+</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>Sistema interno de controle e verificação, conferência e fiscalização da coleta de dados e do trabalho de campo:</label></td>
+</tr>
+<tr>
+<td>III)SISTEMA INTERNO DE CONTROLE E VERIFICAÇÃO, CONFERÊNCIA E FISCALIZAÇÃO DA COLETA DE DADOS E DO TRABALHO DE CAMPO.
+
+Obedecerá aos seguintes critérios: 
+
+III.1)Seleção aleatória de alguns setores pesquisados, havendo a presença de supervisores de campo do instituto, para avaliação da qualidade das informações coletadas;
+
+III.2)Acompanhamento de algumas entrevistas por parte do supervisor, para observar se o pesquisador esta influenciando, ainda que de forma indireta na resposta do entrevistado, comprometendo assim, a qualidade da entrevista e consequentemente o resultado da Pesquisa.
+</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>
+						Dados relativos aos municípios e bairros abrangidos pela pesquisa. Na ausência de delimitação do bairro, 
+						será identificada a área em que foi realizada a pesquisa(conforme §6º. do art. 2º. da Resolução-TSE nº. 23.549/2017, Até o sétimo dia seguinte ao registro da pesquisa, 
+						será ele complementado com os dados relativos aos bairros abrangidos; na ausência de delimitação do bairro, será identificada a área em que foi realizada):
+						</label></td>
+</tr>
+<tr>
+<td>I.3)Abrangência Geográfica ¿ A pesquisa será realizada nos domicílios e áreas públicas urbanas do município, tendo este sido dividido em 4 setores, cada um representando um conglomerado, que estão descritos a seguir:
+
+1.3.1)Setor I:Beira Rio, Siqueira Campos, Evanira O. De Moraes, Fabrício Cezar Freire, Jardim Umuarama, Nova Capital, Novo Horizonte, São Vicente, Tropical Palmas e Vila Nova ¿ 25%(Questionários);
+
+1.3.2)Setor II:Alto Da Colina, Cruzeiro Do Sul, Jardim Brasília, Jardim Municipal, Jardim Querido, Setor Garcia, Porto Imperial, Centro Histórico, São José, Setor Aeroporto, Santa Helena, Vila Militar ¿ 45%(Questionários);
+
+1.3.3)Setor III:Brigadeiro Eduardo Gomes, Fama, Santa Rita De Cássia, Jardim Imperial, Novo Planalto, Padre Luso, Palestina, Parque Eldorado, São Francisco e Setor Nacional ¿ 24%(Questionários);
+
+1.3.4)Setor IV:Jardim Das Mansões, Jardim Dos Ipês e Parque Do Trevo ¿ 6%(Questionários)
+
+O número de entrevistas realizado em cada setor, levará em consideração a proporção do tamanho da população residente recenseada em cada um deles, tendo por base o Censo Populacional de 2010 realizado pelo IBGE. 
+
+As entrevistas serão realizadas majoritariamente nos domicílios (90%), e o restante nas áreas públicas.
+ 
+I.4)Cadastros utilizados para seleção dos componentes do painel amostral e respectivas variáveis associadas a Pesquisa, que irão permitir a caracterização do perfil do eleitorado ¿ Foram utilizados como base de referência para o dimensionamento da amostra, as informações do cadastro de eleitores do TRE/TO, tendo como referencia, Julho/2018, e o Censo Populacional de 2010 do IBGE, para identificação das seguintes variáveis: Número de eleitores, por sexo, faixa etária, grau de instrução, e a renda per capita da população.
+</td>
+</tr>
+</tbody>
+</table>
+
+					<BR />
+				</div>
+				<br /><table>
+<tbody>
+<tr>
+<td><button id="j_idt33:arquivoQuestionario" name="j_idt33:arquivoQuestionario" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="this.form.target='_blank';;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-arrowthick-1-s"></span><span class="ui-button-text ui-c">Visualizar questionário completo aplicado ou a ser aplicado (formato PDF)</span></button><script id="j_idt33:arquivoQuestionario_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_arquivoQuestionario",{id:"j_idt33:arquivoQuestionario",widgetVar:"widget_j_idt33_arquivoQuestionario"});</script></td>
+</tr>
+<tr>
+<td>
+				    <br /></td>
+</tr>
+<tr>
+<td><button id="j_idt33:arquivoBairros" name="j_idt33:arquivoBairros" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="this.form.target='_blank';;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-arrowthick-1-s"></span><span class="ui-button-text ui-c">Visualizar arquivo com detalhamento de bairros/municípios (formato PDF)</span></button><script id="j_idt33:arquivoBairros_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_arquivoBairros",{id:"j_idt33:arquivoBairros",widgetVar:"widget_j_idt33_arquivoBairros"});</script></td>
+</tr>
+<tr>
+<td>
+				    <br /></td>
+</tr>
+</tbody>
+</table>
+</div></fieldset><script id="j_idt33:j_idt39_s" type="text/javascript">PrimeFaces.cw("Fieldset","widget_j_idt33_j_idt39",{id:"j_idt33:j_idt39",widgetVar:"widget_j_idt33_j_idt39"});</script>
+			<br /><br /><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="H4sIAAAAAAAAAM1WX2gcRRifXHppUm2ISU0jNRJjWgyke7mmkWtjsadJyNFrErs12FaIc7vTu0n2z3Rm9v5UWumDVloKgooIioIFfYi+9MW+VKSIUDC0fSkoQhFfCyKCD4I4M3t7e5e7kETQuNx9zO1+f36/7/vN7C09AFHCKHhkAeah5nFsaVOQ5Y5CEt36wzc3u1+90wwik2Cb5UJzEhrcpSnQxnMUsZxrmUXy3GEgr55Cq7B94rudg60L89jk8RGPgq5TaZXYgk5Wm8ksIIOPvb388scdbNCKAFAkIiLinQHnQbNYRYkI2XGqQUzP13/qvyz+eCuIaarERPIUDEj/onYaGohpKI8crs26jCdN87g7h1FhQt769fL1b+91XLsuU1Cwpz7kBdcmriNWeolxZKugG9nE73PLc+1+UG99UJXv7sX3b+KfHlv2fR8NG6qe+kTSV9qme+xznyseou1doVeSUlhKY8aLF+72fvAd/KgZNKXAFobPIr9NhS3SshXYjQC1pnPI0ZSYCqI6zCN64ta1Q+98+P3RCIikQZthQcamoY046FT9jcn+xnROsZMdS4NtTMSYKgcH3b4HdmM6ohha+CzMWGisSEhe9r2dSdvBwURjJC+lKr0caNRVyRI5iCZNSDiiYug7yzPHrlZT8cvbbUv6vQepeq1EAgyjoq7GPKeMgiJHNGARcy3HbWs+Axk2RGtKllAsQvyYeowoEbJ5YjX0Mx4nHgfhJYiLDyEctPrajj8TAqmWr1y21OpTLrYrsO1VU1TgibQ7/LU03SpqZ2Oe8fXwNCgmIUcZ2Rsgj0rk8YawxVX51Xyegr2rNUZupmOuywdmqUsQ5aUjqMSCJnUq3beHe3fC8ezqhwJEi1AhT5mVA0f5pRyOsoh2/vzJ1T8uXExEpO6jeWh5SOTrCP2mPTuD6JtL7/U+9O79y4EkopJc+chpTO/fm4o0u2rbXEYyvPlI9igkIyMHHZdDNomZATE7COkZD+fdaXFP3bJCeJVVFToxqaFa4UlrIS4OQEs7DrNzck4TRSLeCAy7TnncTQ8rMfT4QhKeK9wuvX5//LPWgRP+WdlVcQs9Pn3jkv7bybvPBiflky7NapBAI4ca5EvZxGq90v/Xxbe++EqWlvhnC1Ng/1OvEcQEYwbHEYdWDtJZL2NhQ70XtLpmPO2cHjxXrTn/2Bbbv2AAGIOExIJ8MbOcUCvKHdh3OB4fHkoc6FPCPdT/Twr3q8lVnTKJTVDRYK2KHq+d/njJgTY2kgYXXWeVgkAVBEUOdgWqK1N80UNM+kKK3TWkJlczyuqFSbBvXR2sTr/K4CCYX2Nw+4aHDgxvaHA1ZStj617B/XmIKXXZBmgnwd511S9nXoXxK+DkWoxHhxKjG2IcVKyQbVFkN0OhK845H8j+/wuQ//qfQR2Q4t8jS5dW1AsAAA==" autocomplete="off" />
+</form>
+					</div>
+				</div>
+			</div>
+        <div id="siteRodape" class="site-rodape site-rodape-sombra">
+            PesqEle - Sistema de Registro de Pesquisas Eleitorais, Versão: 2018.01.01, SECINP - Tribunal Superior Eleitoral. Resultado da Pesquisa não é armazenado no sistema. 
+        </div>
+		    <!-- Custom Theme JavaScript --><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/js/base/cand.js.xhtml"></script>
+			<!-- Bootstrap JavaScript --><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/js/bootstrap/bootstrap.min.js.xhtml"></script></body>
+</html>
