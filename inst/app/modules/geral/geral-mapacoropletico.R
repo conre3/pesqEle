@@ -37,7 +37,7 @@ mapacoropletico <- function(input, output, session, df_pesq) {
       dplyr::mutate(n_pesq = ifelse(is.na(n_pesq), 0, n_pesq)) %>% 
       dplyr::mutate(n_pesq = cut(
         x = n_pesq, 
-        breaks = unique(c(-1, 0, 5, 10, 20, max(n_pesq))),
+        breaks = unique(c(-1, 0, 10, 20, 40, max(n_pesq))),
         include.lowest = TRUE
       )) %>% 
       dplyr::mutate(n_pesq = forcats::fct_recode(n_pesq, "0" = "[-1,0]"))
