@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/theme.css.xhtml?ln=primefaces-aristo" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/bootstrap/bootstrap.min.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/timeline/timeline.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/chart/morris.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/sepel2.site.base.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/pesqele.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/css/base/font-awesome.min.css.xhtml" /><link type="text/css" rel="stylesheet" href="/pesqele-publico/javax.faces.resource/primefaces.css.xhtml?ln=primefaces&amp;v=5.1" /><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=5.1"></script><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/primefaces.js.xhtml?ln=primefaces&amp;v=5.1"></script>
+			<title></title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<link rel="shortcut icon" href="http://www.tse.jus.br/internet/img/favicon.ico" type="image/x-icon" />
+			<!-- Bootstrap CSS -->
+		    <!-- Timeline CSS -->
+		    <!-- Morris Charts CSS -->
+			<!-- Cand CSS -->
+		    <!-- Custom Fonts --></head><body><div id="j_idt15" class="ui-dialog ui-widget ui-widget-content ui-overlay-hidden ui-corner-all ui-shadow"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="j_idt15_title" class="ui-dialog-title"></span></div><div class="ui-dialog-content ui-widget-content"><span id="groupAviso">
+					<div class="modal-body" align="center"><img id="j_idt17" src="/pesqele-publico/javax.faces.resource/wait.gif.xhtml?ln=images" alt="" /><img id="j_idt18" width="20" alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /><label id="j_idt19" class="ui-outputlabel ui-widget">Por favor, aguarde...</label>
+					</div></span></div></div><script id="j_idt15_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","barraProgresso",{id:"j_idt15",widgetVar:"barraProgresso",modal:true,width:"300",height:"120",appendTo:"@(body)"});});</script>
+			<!-- CABE&Ccedil;ALHO --><html xmlns="http://www.w3.org/1999/xhtml"><body>
+		<div id="siteCabecalho" class="navbar navbar-default navbar-fixed-top site-cabecalho">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#siteCabecalhoMenu" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/pesqele-publico"><img id="j_idt25" src="/pesqele-publico/javax.faces.resource/topo-tse.png.xhtml?ln=images" class="site-cabecalho-logo" alt="Logo do TSE" /> 
+							<span class="site-cabecalho-titulo">PesqEle Público</span>
+							<span class="site-cabecalho-titulo-vermelho"></span>
+					</a>
+					<div class="site-versao-nome">2018.10.00</div>
+				</div>
+			</div>
+		</div></body>
+</html>
+			<div id="sitePrincipal" class="container-fluid site-principal">
+				<div id="wrapper">
+					<div id="page-content-wrapper"><div id="msg" class="ui-messages ui-widget" aria-live="polite"></div>
+<form id="j_idt33" name="j_idt33" method="post" action="/pesqele-publico/app/pesquisa/detalhar.xhtml" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt33" value="j_idt33" />
+
+			<p style="float: right;"><button id="j_idt33:j_idt35" name="j_idt33:j_idt35" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="PrimeFaces.ab({s:'j_idt33:j_idt35',onst:function(cfg){PF('barraProgresso').show();;},onsu:function(data,status,xhr){PF('barraProgresso').hide();;}});return false;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-back"></span><span class="ui-button-text ui-c">Voltar</span></button><script id="j_idt33:j_idt35_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_j_idt35",{id:"j_idt33:j_idt35",widgetVar:"widget_j_idt33_j_idt35"});</script><img id="j_idt33:j_idt36" width="5px;" alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /><button id="j_idt33:j_idt37" name="j_idt33:j_idt37" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="imprimir();;" type="button"><span class="ui-button-icon-left ui-icon ui-c ui-icon-print"></span><span class="ui-button-text ui-c">Imprimir</span></button><script id="j_idt33:j_idt37_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_j_idt37",{id:"j_idt33:j_idt37",widgetVar:"widget_j_idt33_j_idt37"});</script>
+			</p>
+			<br /><br /><fieldset id="j_idt33:j_idt39" class="ui-fieldset ui-widget ui-widget-content ui-corner-all ui-hidden-container" style="margin-left: 10px;" data-widget="widget_j_idt33_j_idt39"><div class="ui-fieldset-content">
+				<div id="print">
+					<H4 align="center">Visualizar Pesquisa Eleitoral - AM-00109/2018</H4>
+					<H5 align="center">AMAZONAS</H5><table id="j_idt33:camposPesquisa" cellpadding="10" width="100%">
+<tbody>
+<tr>
+<td>
+						<label>Número de identificação:</label></td>
+<td>AM-00109/2018</td>
+<td>
+						<label>Data de registro:</label></td>
+<td>16/10/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Cargo(s):</label></td>
+<td>Governador</td>
+<td>
+						<label>Data de divulgação:</label></td>
+<td>22/10/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Empresa contratada/ Nome Fantasia:</label></td>
+<td>CNPJ: 04816658000127 - 
+							EDITORA ANA CASSIA S.A. / REDE DIARIO DE COMUNICACAO</td>
+<td>
+						<label>Eleição:</label></td>
+<td>Eleições Gerais 2018</td>
+</tr>
+<tr>
+<td>
+						<label>Entrevistados:</label></td>
+<td>1200</td>
+<td>
+						<label>Data de início da pesquisa:</label></td>
+<td>17/10/2018</td>
+</tr>
+<tr>
+<td>
+						<label>Data de término da pesquisa:</label></td>
+<td>21/10/2018</td>
+<td>
+						<label>Estatístico responsável:</label></td>
+<td>ROBERIO REBOUCAS DA SILVA</td>
+</tr>
+<tr>
+<td>
+						<label>Registro do estatístico no CONRE:</label></td>
+<td>8339</td>
+<td><label id="j_idt33:j_idt72" class="ui-outputlabel ui-widget">Valor:</label></td>
+<td>R$ 17.437,90</td>
+</tr>
+<tr>
+<td><label id="j_idt33:j_idt74" class="ui-outputlabel ui-widget">Contratante é a própria empresa?</label></td>
+<td>Sim (Nota fiscal não exigida)</td>
+</tr>
+</tbody>
+</table>
+
+					<br /><table>
+<tbody>
+<tr>
+<td class="colunas"><label id="j_idt33:j_idt78" class="ui-outputlabel ui-widget">Contratante(s): </label></td>
+<td><img id="j_idt33:j_idt80" width="5px; " alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /> CNPJ: 04816658000127 - EDITORA ANA CASSIA S.A.</td>
+</tr>
+<tr>
+<td class="colunas"><label id="j_idt33:j_idt84" class="ui-outputlabel ui-widget">Pagante(s) do trabalho: </label></td>
+<td><img id="j_idt33:j_idt86" width="5px; " alt="" src="/pesqele-publico/javax.faces.resource/spacer/dot_clear.gif.xhtml?ln=primefaces&amp;v=5.1" /> CNPJ: 04816658000127 - EDITORA ANA CASSIA S.A.</td>
+</tr>
+</tbody>
+</table>
+
+					<br /><table>
+<tbody>
+<tr>
+<td>
+						<label>Metodologia de pesquisa:</label></td>
+</tr>
+<tr>
+<td>Pesquisa quantitativa, por amostragem, com aplicação de questionário estruturado e abordagem pessoal em domicílios, na cidade de Manaus e em 11 (onze) municípios do interior do estado do Amazonas, selecionados por representarem com maior fidedignidade o eleitorado interiorano, em suas características sociais, culturais, demográficas e geográficas. O universo da pesquisa é o conjunto de eleitores do Estado do Amazonas, com 16 anos ou mais.
+	O levantamento será domiciliar, sendo entrevistado um único eleitor por domicílio. Os eleitores serão escolhidos através de sorteio, observada a estratificação realizada por zonas eleitorais e as quotas amostrais de sexo, idade e escolaridade, tendo todos iguais chances de fazer parte da amostra. Somente serão entrevistados eleitores que votem em local de votação localizado em bairro pertencente à zona eleitoral que se busca entrevistar e que estejam aptos a votar nas eleições de 2018, com sua situação devidamente regularizada junto à Justiça Eleitoral. 
+	O método de seleção amostral a ser utilizado será a amostragem aleatória estratificada para proporções. Realiza-se, a priori, uma estratificação por zonas eleitorais. Uma vez definida a quantia de entrevistas a serem realizadas junto a cada zona eleitoral, realiza-se uma nova estratificação dentro de cada zona eleitoral, no escopo de se definir o quantitativo de entrevistas a serem realizadas em cada um dos bairros que compõem aquela zona eleitoral.
+</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>Plano amostral e ponderação quanto a sexo, idade, grau de instrução e nível econômico do entrevistado; intervalo de confiança e margem de erro:</label></td>
+</tr>
+<tr>
+<td>O universo da pesquisa foi definido como o eleitorado do Estado do Amazonas. A amostra é composta por 1.200 (mil e duzentas) entrevistas, sendo 800 (oitocentas) na capital do Estado (Manaus) e 400 (quatrocentas) no interior, distribuídas da seguinte forma: Borba - 18 entrevistas; Coari ¿ 44 entrevistas; Humaitá ¿ 25 entrevistas; Iranduba ¿ 27 entrevistas;  Itacoatiara ¿ 58 entrevistas; Manacapuru ¿ 58 entrevistas; Parintins ¿ 60 entrevistas; Presidente Figueiredo ¿ 20 entrevistas; Tabatinga ¿ 29 entrevistas; Tefé ¿ 36 entrevistas; São Gabriel da Cachoeira ¿ 25 entrevistas. 
+	A seleção dos entrevistados observará, ainda, as seguintes quotas-amostrais (sexo, idade e escolaridade) dimensionadas a partir das informações disponibilizadas pelo TSE (repositório de dados eleitorais):
+Manaus ¿ 800 entrevistas - Gênero: Feminino (422) e Masculino (378) ¿ Escolaridade: Ensino Superior Completo (105), Ensino Superior Incompleto (79), Ensino Médio Completo (296), Ensino Médio Incompleto (112), Ensino Fundamental Completo (43), Ensino Fundamental Incompleto (138), Lê e escreve (20), Analfabeto (7) ¿ Idade/ Faixa Etária: 16 a 24 anos (148), 25 a 34 anos (201), 35 a 44 anos (191), 45 a 54 anos (130), 55 ou mais (130).
+Interior ¿ 400 entrevistas ¿ Gênero: Feminino (200) e Masculino (200) ¿ Escolaridade: Ensino Superior Completo (20), Ensino Superior Incompleto (13), Ensino Médio Completo (96), Ensino Médio Incompleto (70), Ensino Fundamental Completo (20), Ensino Fundamental Incompleto (108), Lê e escreve (45), Analfabeto (28) ¿ Idade/ Faixa Etária: 16 a 24 anos (88), 25 a 34 anos (98), 35 a 44 anos (82), 45 a 54 anos (56), 55 ou mais (76).
+Em face da existência de quotas-amostrais para sexo, idade e grau de instrução, haverá uma total correspondência dessas informações na amostra e no universo/população (eleitorado da capital e dos municípios selecionados). Dito de outra forma, os percentuais destas variáveis na amostra coincidirão com exatidão aqueles constantes no repositório de dados eleitorais do TSE. 
+Quanto ao nível econômico, um processo de amostragem aleatória simples na escolha dos entrevistados, condicionado às demais quotas-amostrais, garantirá uma representação adequada desta variável na amostra. Para tanto, espera-se um resultado similar à publicação do IBGE (Censo 2010) acerca desta variável, qual seja: até 2 Salários Mínimos (87,5%); mais de 2 salários mínimos até 5 salários mínimos (8,5%); mais de 5 salários mínimos até 10 salários mínimos (2,7%); mais de 10 salários mínimos até 20 salários mínimos (0,9%); mais de 20 salários mínimos (0,4%). Tais percentuais poderão oscilar dentro da margem de erro da pesquisa (3% para mais ou para menos).
+Veja-se que inexiste exigência legal, seja na lei 9.504/1997 ou na Resolução 23.549/2017, para a realização de quotas e/ou estratificações pelas variáveis sexo, idade, escolaridade e nível econômico. O que se exige é uma ponderação sobre essas variáveis, o que não se confunde com a estratificação, que é procedimento estatístico totalmente diverso do primeiro. A questão de dimensionar ou não quotas-amostrais (para as variáveis sexo, idade, escolaridade nível econômico etc) é uma questão estritamente atinente à metodologia do trabalho, definida pelo expert da área e não é, em nenhuma hipótese, critério para afirmar a correção ou incorreção da metodologia empregada.
+	Ademais, o estudo será conduzido de modo que a margem de erro máxima seja de 3 (três) pontos percentuais para mais ou para menos, com um intervalo de confiança a 95%.
+</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>Sistema interno de controle e verificação, conferência e fiscalização da coleta de dados e do trabalho de campo:</label></td>
+</tr>
+<tr>
+<td>O trabalho de coleta das informações no campo será feito utilizando-se uma equipe composta de 20 (vinte) pesquisadores e 5 (cinco) supervisores de campo e 1 (um) coordenador geral do campo. 
+	Para controle, verificação e conferência das informações coletadas, será obtida uma amostra aleatória simples de tamanho igual a 50 questionários.
+</td>
+</tr>
+<tr>
+<td>
+						<br />
+						<label>
+						Dados relativos aos municípios e bairros abrangidos pela pesquisa. Na ausência de delimitação do bairro, 
+						será identificada a área em que foi realizada a pesquisa(conforme §6º. do art. 2º. da Resolução-TSE nº. 23.549/2017, Até o sétimo dia seguinte ao registro da pesquisa, 
+						será ele complementado com os dados relativos aos bairros abrangidos; na ausência de delimitação do bairro, será identificada a área em que foi realizada):
+						</label></td>
+</tr>
+<tr>
+<td>Das 1.200 (mil e duzentas) entrevistas, 800 (oitocentas) serão distribuídas da seguinte formanos bairros da capital amazonense (Manaus): 1ª Zona Eleitoral (58) - Adrianópolis (5), Cachoeirinha (8), Centro (16), Aparecida (3), N. Sra. das Graças (7), Praça 14 (7), Presidente Vargas (2), Raiz (6) e São Geraldo (4); 2ª Zona Eleitoral (51) ¿ Aleixo (11), Chapada (3), Flores (18) e Parque 10 de Novembro (19); 31ª Zona Eleitoral (46) ¿ Betânia (5), Col. Oliveira Machado (3), Crespo (6), Educandos (7), Mauazinho (9), Morro da Liberdade (6), Santa Luzia (4), São Lázaro (6) e Vila Buriti (0); 32ª Zona Eleitoral (69) ¿ Compensa (35), Gloria (4), Santo Antonio (10), São Jorge (11), São Raimundo (5) e Vila da Prata (4); 37ª Zona Eleitoral (55) ¿ Japiim (24), Petrópolis (23) e São Francisco (8); 40ª Zona Eleitoral (71) ¿ Alvorada (32), Alvorada 2 (1), Dom Pedro (14), Lírio do Vale (10), Nova Esperança (6) e Santo Agostinho (8); 58ª Zona Eleitoral (68) ¿ Cidade Nova (66) e Colônia Santo Antonio (2); 62ª Zona Eleitoral (73) ¿ Lago Azul (7), Paz (7), Planalto (5), Redenção (19), Santa Etelvina (15), Tarumã (19) e Tarumã-açú (1); 63ª Zona Eleitoral (73) ¿ Gilberto Mestrinho (15), São José Operário (37) e Tancredo Neves (21); 65ª Zona Eleitoral (67) ¿ Col. Terra Nova (16), Monte das Oliveiras (14), Nova Cidade (27) e Novo Israel (10); 68ª Zona Eleitoral (49) ¿ Jorge Teixeira (45) e Puraquequara (4); 70ª Zona Eleitoral (61) ¿ Cidade de Deus (19) e Novo Aleixo (42).
+	As demais entrevistas (400) serão realizadas nos seguintes municípios do Interior do Estado do Amazonas: Borba - 18 entrevistas; Coari ¿ 44 entrevistas; Humaitá ¿ 25 entrevistas; Iranduba ¿ 27 entrevistas;  Itacoatiara ¿ 58 entrevistas; Manacapuru ¿ 58 entrevistas; Parintins ¿ 60 entrevistas; Presidente Figueiredo ¿ 20 entrevistas; Tabatinga ¿ 29 entrevistas; Tefé ¿ 36 entrevistas; São Gabriel da Cachoeira ¿ 25 entrevistas. 
+</td>
+</tr>
+</tbody>
+</table>
+
+					<BR />
+				</div>
+				<br /><table>
+<tbody>
+<tr>
+<td><button id="j_idt33:arquivoQuestionario" name="j_idt33:arquivoQuestionario" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="this.form.target='_blank';;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-arrowthick-1-s"></span><span class="ui-button-text ui-c">Visualizar questionário completo aplicado ou a ser aplicado (formato PDF)</span></button><script id="j_idt33:arquivoQuestionario_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_arquivoQuestionario",{id:"j_idt33:arquivoQuestionario",widgetVar:"widget_j_idt33_arquivoQuestionario"});</script></td>
+</tr>
+<tr>
+<td>
+				    <br /></td>
+</tr>
+<tr>
+<td><button id="j_idt33:arquivoBairros" name="j_idt33:arquivoBairros" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" onclick="this.form.target='_blank';;" type="submit"><span class="ui-button-icon-left ui-icon ui-c ui-icon-arrowthick-1-s"></span><span class="ui-button-text ui-c">Visualizar arquivo com detalhamento de bairros/municípios (formato PDF)</span></button><script id="j_idt33:arquivoBairros_s" type="text/javascript">PrimeFaces.cw("CommandButton","widget_j_idt33_arquivoBairros",{id:"j_idt33:arquivoBairros",widgetVar:"widget_j_idt33_arquivoBairros"});</script></td>
+</tr>
+<tr>
+<td>
+				    <br /></td>
+</tr>
+</tbody>
+</table>
+</div></fieldset><script id="j_idt33:j_idt39_s" type="text/javascript">PrimeFaces.cw("Fieldset","widget_j_idt33_j_idt39",{id:"j_idt33:j_idt39",widgetVar:"widget_j_idt33_j_idt39"});</script>
+			<br /><br /><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="H4sIAAAAAAAAAM1WX2gcRRifXHppUm2ISU0jNRJjWgyke7mmkWtjsadJyNFrErs12FaIc7vTu0n2z3Rm9v5UWumDVloKgooIioIFfYi+9MW+VKSIUDC0fSkoQhFfCyKCD4I4M3t7e5e7kETQuNx9zO1+f36/7/vN7C09AFHCKHhkAeah5nFsaVOQ5Y5CEt36wzc3u1+90wwik2Cb5UJzEhrcpSnQxnMUsZxrmUXy3GEgr55Cq7B94rudg60L89jk8RGPgq5TaZXYgk5Wm8ksIIOPvb388scdbNCKAFAkIiLinQHnQbNYRYkI2XGqQUzP13/qvyz+eCuIaarERPIUDEj/onYaGohpKI8crs26jCdN87g7h1FhQt769fL1b+91XLsuU1Cwpz7kBdcmriNWeolxZKugG9nE73PLc+1+UG99UJXv7sX3b+KfHlv2fR8NG6qe+kTSV9qme+xznyseou1doVeSUlhKY8aLF+72fvAd/KgZNKXAFobPIr9NhS3SshXYjQC1pnPI0ZSYCqI6zCN64ta1Q+98+P3RCIikQZthQcamoY046FT9jcn+xnROsZMdS4NtTMSYKgcH3b4HdmM6ohha+CzMWGisSEhe9r2dSdvBwURjJC+lKr0caNRVyRI5iCZNSDiiYug7yzPHrlZT8cvbbUv6vQepeq1EAgyjoq7GPKeMgiJHNGARcy3HbWs+Axk2RGtKllAsQvyYeowoEbJ5YjX0Mx4nHgfhJYiLDyEctPrajj8TAqmWr1y21OpTLrYrsO1VU1TgibQ7/LU03SpqZ2Oe8fXwNCgmIUcZ2Rsgj0rk8YawxVX51Xyegr2rNUZupmOuywdmqUsQ5aUjqMSCJnUq3beHe3fC8ezqhwJEi1AhT5mVA0f5pRyOsoh2/vzJ1T8uXExEpO6jeWh5SOTrCP2mPTuD6JtL7/U+9O79y4EkopJc+chpTO/fm4o0u2rbXEYyvPlI9igkIyMHHZdDNomZATE7COkZD+fdaXFP3bJCeJVVFToxqaFa4UlrIS4OQEs7DrNzck4TRSLeCAy7TnncTQ8rMfT4QhKeK9wuvX5//LPWgRP+WdlVcQs9Pn3jkv7bybvPBiflky7NapBAI4ca5EvZxGq90v/Xxbe++EqWlvhnC1Ng/1OvEcQEYwbHEYdWDtJZL2NhQ70XtLpmPO2cHjxXrTn/2Bbbv2AAGIOExIJ8MbOcUCvKHdh3OB4fHkoc6FPCPdT/Twr3q8lVnTKJTVDRYK2KHq+d/njJgTY2kgYXXWeVgkAVBEUOdgWqK1N80UNM+kKK3TWkJlczyuqFSbBvXR2sTr/K4CCYX2Nw+4aHDgxvaHA1ZStj617B/XmIKXXZBmgnwd511S9nXoXxK+DkWoxHhxKjG2IcVKyQbVFkN0OhK845H8j+/wuQ//qfQR2Q4t8jS5dW1AsAAA==" autocomplete="off" />
+</form>
+					</div>
+				</div>
+			</div>
+        <div id="siteRodape" class="site-rodape site-rodape-sombra">
+            PesqEle - Sistema de Registro de Pesquisas Eleitorais, Versão: 2018.10.00, SECINP - Tribunal Superior Eleitoral. Resultado da Pesquisa não é armazenado no sistema. 
+        </div>
+		    <!-- Custom Theme JavaScript --><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/js/base/cand.js.xhtml"></script>
+			<!-- Bootstrap JavaScript --><script type="text/javascript" src="/pesqele-publico/javax.faces.resource/js/bootstrap/bootstrap.min.js.xhtml"></script></body>
+</html>
