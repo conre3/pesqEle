@@ -1,4 +1,4 @@
-form_tse_estado <- function(estado = 'SP', vs, dt) {
+form_tse_estado <- function(estado = 'SP', vs, dt, pesquisa = "5") {
   list('javax.faces.partial.ajax'='true',
        'javax.faces.source'='formPesquisa:filtroUf',
        'javax.faces.partial.execute'='formPesquisa:filtroUf',
@@ -11,13 +11,13 @@ form_tse_estado <- function(estado = 'SP', vs, dt) {
        'formPesquisa:filtroUf_focus'='',
        'formPesquisa:filtroUf_input'=estado,
        'formPesquisa:eleicoes_focus'='',
-       'formPesquisa:eleicoes_input'='5',
+       'formPesquisa:eleicoes_input'=pesquisa,
        'formPesquisa:j_idt63_input'=dt[1],
        'formPesquisa:j_idt65_input'=dt[2],
        'javax.faces.ViewState'=vs)
 }
 
-form_tse_uf_2018 <- function(estado = 'SP', vs, dt) {
+form_tse_uf_2018 <- function(estado = 'SP', vs, dt, pesquisa = "5") {
   list('javax.faces.partial.ajax'='true',
        'javax.faces.source'='formPesquisa:idBtnPesquisar',
        'javax.faces.partial.execute'='@all',
@@ -31,7 +31,27 @@ form_tse_uf_2018 <- function(estado = 'SP', vs, dt) {
        'formPesquisa:selectCidades_focus'='',
        'formPesquisa:selectCidades_input'='',
        'formPesquisa:eleicoes_focus'='',
-       'formPesquisa:eleicoes_input'='5',
+       'formPesquisa:eleicoes_input'=pesquisa,
+       'formPesquisa:j_idt63_input'=dt[1],
+       'formPesquisa:j_idt65_input'=dt[2],
+       'javax.faces.ViewState'=vs)
+}
+
+form_tse_uf_2020 <- function(estado = 'SP', vs, dt, pesquisa = "5") {
+  list('javax.faces.partial.ajax'='true',
+       'javax.faces.source'='formPesquisa:idBtnPesquisar',
+       'javax.faces.partial.execute'='@all',
+       'javax.faces.partial.render'='formPesquisa formPesquisa:grupoPrincipal',
+       'formPesquisa:idBtnPesquisar'='formPesquisa:idBtnPesquisar',
+       'formPesquisa'='formPesquisa',
+       'formPesquisa:j_idt49'='',
+       'formPesquisa:j_idt51'='',
+       'formPesquisa:filtroUf_focus'='',
+       'formPesquisa:filtroUf_input'=estado,
+       'formPesquisa:selectCidades_focus'='',
+       'formPesquisa:selectCidades_input'='',
+       'formPesquisa:eleicoes_focus'='',
+       'formPesquisa:eleicoes_input'=pesquisa,
        'formPesquisa:j_idt63_input'=dt[1],
        'formPesquisa:j_idt65_input'=dt[2],
        'javax.faces.ViewState'=vs)

@@ -41,8 +41,8 @@ parse_detalhes_arq <- function(arq, rds = FALSE) {
     outras_infos <- tabelas[[3]] %>%
       rvest::html_table(fill = TRUE) %>% {
         dplyr::bind_cols(
-          dplyr::slice(., seq(1, n(), by = 2)),
-          dplyr::slice(., seq(2, n(), by = 2))
+          dplyr::slice(., seq(1, dplyr::n(), by = 2)),
+          dplyr::slice(., seq(2, dplyr::n(), by = 2))
         )
       } %>%
       setNames(c('key', 'val')) %>%

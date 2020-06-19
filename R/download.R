@@ -172,10 +172,59 @@ pesq_download_2018_uf <- function(sigla, path) {
   
 }
 
+pesq_download_2020_uf <- function(sigla, path) {
+  # funcao que baixa detalhes
+  f <- function(id, item, dt) {
+    id <- stringr::str_replace_all(id, "[^A-Za-z0-9]+", "-")
+    arq_detalhe <- sprintf('%s/pesq_details_%s_%s.html', path, sigla, id)
+    if (!file.exists(arq_detalhe)) {
+      wd <- httr::write_disk(arq_detalhe, overwrite = TRUE)
+      body <- form_detalhar(item - 1L, sigla, "", vs(r0), dt)
+      r_detalhe <- httr::POST(u, body = body, encode = 'form')
+      httr::GET(u_detalhar(), wd)
+      'OK'
+    } else {
+      'ja foi'
+    }
+  }
+  f <- purrr::possibly(f, "erro")
+  # acessa a pagina
+  message("Downloading ", sigla, "...")
+  # pega resultados por UF
+  # quebra pesquisas para nao dar mais de 100 results
+  datas <- list(c("01/01/2020", "19/06/2020"))
+  u <- u_tse()
+  r0 <- httr::GET(u)
+  d_results <- purrr::imap_dfr(datas, ~{
+    body_uf <- form_tse_estado(sigla, vs(r0), .x, pesquisa = "6")
+    r_muni <- httr::POST(u, body = body_uf, encode = 'form')
+    message("Data", .y, "...")
+    .file <- stringr::str_glue("{path}/pesq_main_{sigla}_{.y}.html")
+    wd <- httr::write_disk(.file, overwrite = TRUE)
+    body <- form_tse_uf_2020(sigla, vs(r0), .x, pesquisa = "6")
+    r <- httr::POST(u, body = body, encode = "form", wd)
+    res <- parse_arq(.file)
+    r_pags <- purrr::imap_chr(res$numero_de_identificacao, f, dt = .x)
+    tibble::tibble(pags = list(r_pags))
+  })
+  # baixa detalhes
+  # if (length(d_results$numero_de_identificacao) == 100L) {
+  #   warning("More than 100 results. We need to break the search.")
+  # }
+  
+}
+
 pesq_download_2018 <- function(path = "data-raw/html_2018") {
   dir.create(path, FALSE, TRUE)
   uf <- c(ufs(), "BR")
   names(uf) <- uf
   purrr::map_dfr(uf, pesq_download_2018_uf, path = path, .id = "uf")
+}
+
+pesq_download_2020 <- function(path = "data-raw/html_2020") {
+  dir.create(path, FALSE, TRUE)
+  uf <- c(ufs(), "BR")
+  names(uf) <- uf
+  purrr::map_dfr(uf, pesq_download_2020_uf, path = path, .id = "uf")
 }
 

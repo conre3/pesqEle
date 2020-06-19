@@ -83,7 +83,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
     # tudo o que nao bateu \\u00e9 lixo - dado duplicado
     dplyr::inner_join(dplyr::select(pesq_main_tidy, -arq), c("id")) %>%
     dplyr::group_by(estatistico_registro) %>%
-    dplyr::mutate(empresas_por_estatistico = dplyr::n_distinct(empresa), n = n()) %>%
+    dplyr::mutate(empresas_por_estatistico = dplyr::n_distinct(empresa), n = dplyr::n()) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(cnpj = stringr::str_extract(empresa_contratada, re_cnpj),
            emp_nm = clean_emp(empresa_contratada)) %>%
