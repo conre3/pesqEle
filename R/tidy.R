@@ -63,7 +63,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
                        "estatistico_registro",
                        "verificacao",
                        "valor")) %>%
-    dplyr::filter(eleicao == "Elei\u00e7\u00f5es Gerais 2018") %>%
+    # dplyr::filter(eleicao == "Elei\u00e7\u00f5es Gerais 2018") %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("dt_")),
                      dplyr::funs(as.Date(., format = "%d/%m/%Y"))) %>%
     dplyr::mutate(n_entrevistados = as.numeric(n_entrevistados),
@@ -128,7 +128,7 @@ pesq_tidy <- function(pesq_main, pesq_details) {
       txt_about = sobre_municipio,
       txt_plan = plano_amostral
     ) %>%
-    dplyr::filter(info_election == "Elei\u00e7\u00f5es Gerais 2018") %>%
+    # dplyr::filter(info_election == "Elei\u00e7\u00f5es Gerais 2018") %>%
     tidyr::separate(id_pesq, c("info_uf", "temp"), "-", remove = FALSE) %>%
     dplyr::select(-temp) %>%
     dplyr::mutate(stat_unique = id_fonema(stat_id, stat_nm)) %>% 
