@@ -2,29 +2,32 @@ Package: pesqEle
 Title: Election Polls from Brazilian Superior Electoral Court
 Version: 0.0.2
 Authors@R: c(
-    person("Julio", "Trecenti", role = c("aut","cre"), email = "jtrecenti@curso-r.com"),
-    person("William", "Amorim", role = c("aut"), email = "thewilliam89@gmail.com"),
-    person("Bruna", "Wundervald", role = c("ctb", "cph"), email = "brunadaviesw@gmail.com"))
+    person("Julio", "Trecenti", role = c("aut","cre"), email = "julio.trecenti@gmail.com"),
+    person("William", "Amorim", role = c("ctb"), email = "thewilliam89@gmail.com"),
+    person("Bruna", "Wundervald", role = c("ctb"), email = "brunadaviesw@gmail.com"))
 Description: Downloads and parses data from official site on Supreme
     Electoral Court in Brazil (Tribunal Superior Eleitoral, TSE). Data are 
-    collected from TSE site (<http://inter01.tse.jus.br/pesqele-publico/>). 
-    Latest update was in May 31, 2018. There are 186 registered polls, 
-    conducted by 74 companies.
+    collected from TSE site (<https://www.tse.jus.br/hotsites/pesquisas-eleitorais/index.html>).
 Depends:
     R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-Imports: dplyr,
+RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
     tidyr,
     httr,
-    rvest,
     xml2,
-    stringr,
     magrittr,
     purrr,
     tibble,
-    SoundexBR
+    janitor,
+    fs,
+    readr,
+    abjutils,
+    lubridate,
+    stringr
 Suggests: knitr,
     rmarkdown
+Roxygen: list(markdown = TRUE)
